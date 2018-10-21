@@ -143,5 +143,10 @@
             <artifactId>freetts</artifactId>
             <version>1.2.2</version>
         </dependency>
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>3.4.6</version>
+        </dependency>
     </dependencies>
 </project>
