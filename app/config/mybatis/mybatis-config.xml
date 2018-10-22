@@ -29,7 +29,7 @@
     </environments>
 
     <mappers>
-        <mapper resource="/config/mybatis/mappers/sample.xml"/>
+        <mapper resource="mybatis/mappers/sample.xml"/>
     </mappers>
 
 </configuration>

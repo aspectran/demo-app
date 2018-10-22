@@ -12,6 +12,10 @@
     <environment>
         <properties>
             <item name="mybatis.environment" value="default"/>
+            <item name="mybatis.db.driver" value="%{classpath:db.encrypted.properties^driver}"/>
+            <item name="mybatis.db.url" value="%{classpath:db.encrypted.properties^url}"/>
+            <item name="mybatis.db.username" value="%{classpath:db.encrypted.properties^username}"/>
+            <item name="mybatis.db.password" value="%{classpath:db.encrypted.properties^password}"/>
         </properties>
     </environment>
 
@@ -19,10 +23,16 @@
         <properties>
             <item name="configLocation" value="/config/mybatis/mybatis-config.xml"/>
             <item name="environment" value="%{mybatis.environment}"/>
+            <item name="properties" type="properties">
+                <value name="driver">%{mybatis.db.driver}</value>
+                <value name="url">%{mybatis.db.url}</value>
+                <value name="username">%{mybatis.db.username}</value>
+                <value name="password">%{mybatis.db.password}</value>
+            </item>
         </properties>
     </bean>
 
-    <bean id="sqlSessionTxAdvice" class="com.aspectran.support.orm.mybatis.SqlSessionTtxAdvice" scope="prototype">
+    <bean id="sqlSessionTxAdvice" class="com.aspectran.support.orm.mybatis.SqlSessionTxAdvice" scope="prototype">
         <constructor>
             <arguments>
                 <item><call bean="sqlSessionFactory"/></item>
@@ -39,7 +49,7 @@
         </description>
         <joinpoint target="translet">
             pointcut: {
-                +: **@**.*Dao
+                +: **@**.*Dao^get*,select*,insert*,update*,delete*
             }
         </joinpoint>
         <advice bean="sqlSessionTxAdvice">

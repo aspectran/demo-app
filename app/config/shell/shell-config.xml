@@ -12,5 +12,6 @@
     <append file="/config/shell/examples/hello.xml"/>
     <append file="/config/shell/examples/echo.xml"/>
     <append file="/config/shell/examples/speak.xml"/>
+    <append file="/config/shell/examples/sample.xml"/>
 
 </aspectran>

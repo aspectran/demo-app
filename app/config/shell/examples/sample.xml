@@ -1,0 +1,12 @@
+<!DOCTYPE aspectran PUBLIC "-//ASPECTRAN//DTD Aspectran Configuration 5.0//EN"
+                           "http://aspectran.github.io/dtd/aspectran-5.dtd">
+
+<aspectran>
+
+    <translet name="getOne">
+        <transform type="transform/text">
+            <action bean="sampleAction" method="getOne"/>
+        </transform>
+    </translet>
+
+</aspectran>

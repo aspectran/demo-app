@@ -15,24 +15,30 @@
  */
 package com.aspectran.support.orm.mybatis;
 
-import com.aspectran.core.activity.Translet;
 import com.aspectran.core.component.bean.ablility.FactoryBean;
-import com.aspectran.core.component.bean.ablility.InitializableTransletBean;
+import com.aspectran.core.component.bean.ablility.InitializableBean;
+import com.aspectran.core.component.bean.aware.ActivityContextAware;
+import com.aspectran.core.context.ActivityContext;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import java.io.File;
 import java.io.FileReader;
 import java.io.Reader;
+import java.util.Properties;
 
 /**
  * {@code FactoryBean} that creates an MyBatis {@code SqlSessionFactory} using default MyBatis Configuration.
  */
-public class SimpleSqlSessionFactoryBean implements InitializableTransletBean, FactoryBean<SqlSessionFactory> {
+public class SimpleSqlSessionFactoryBean implements ActivityContextAware, InitializableBean, FactoryBean<SqlSessionFactory> {
+
+    private ActivityContext context;
 
     private String configLocation;
 
     private String environment;
+
+    private Properties properties;
 
     private SqlSessionFactory sqlSessionFactory;
 
@@ -56,6 +62,15 @@ public class SimpleSqlSessionFactoryBean implements InitializableTransletBean, F
     }
 
     /**
+     * Set optional properties to be passed into the SqlSession configuration.
+     *
+     * @param properties the optional properties
+     */
+    public void setProperties(Properties properties) {
+        this.properties = properties;
+    }
+
+    /**
      * Build a {@code SqlSessionFactory} instance.
      *
      * The default implementation uses the standard MyBatis
@@ -65,22 +80,31 @@ public class SimpleSqlSessionFactoryBean implements InitializableTransletBean, F
      * @return SqlSessionFactory
      */
     protected SqlSessionFactory buildSqlSessionFactory(File configFile) {
+        ClassLoader originalClassLoader = Thread.currentThread().getContextClassLoader();
         try (Reader reader = new FileReader(configFile)) {
+            Thread.currentThread().setContextClassLoader(context.getEnvironment().getClassLoader());
             SqlSessionFactoryBuilder sqlSessionFactoryBuilder = new SqlSessionFactoryBuilder();
-            return sqlSessionFactoryBuilder.build(reader, environment);
+            return sqlSessionFactoryBuilder.build(reader, environment, properties);
         } catch(Exception ex) {
             throw new IllegalArgumentException("Failed to parse mybatis config resource: " + configLocation, ex);
+        } finally {
+            Thread.currentThread().setContextClassLoader(originalClassLoader);
         }
     }
 
     @Override
-    public void initialize(Translet translet) throws Exception {
+    public void setActivityContext(ActivityContext context) {
+        this.context = context;
+    }
+
+    @Override
+    public void initialize() throws Exception {
         if(sqlSessionFactory == null) {
             if(configLocation == null) {
                 throw new IllegalArgumentException("Property 'configLocation' is required");
             }
 
-            File configFile = translet.getEnvironment().toRealPathAsFile(configLocation);
+            File configFile = context.getEnvironment().toRealPathAsFile(configLocation);
             sqlSessionFactory = buildSqlSessionFactory(configFile);
         }
     }

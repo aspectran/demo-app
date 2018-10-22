@@ -17,7 +17,10 @@ package com.aspectran.support.orm.mybatis;
 
 import com.aspectran.core.activity.Translet;
 import com.aspectran.core.component.bean.ablility.FactoryBean;
+import com.aspectran.core.component.bean.ablility.InitializableBean;
 import com.aspectran.core.component.bean.ablility.InitializableTransletBean;
+import com.aspectran.core.component.bean.aware.ActivityContextAware;
+import com.aspectran.core.context.ActivityContext;
 import com.aspectran.core.util.StringUtils;
 import com.aspectran.core.util.logging.Log;
 import com.aspectran.core.util.logging.LogFactory;
@@ -51,11 +54,13 @@ import java.util.Properties;
  * @author Hunter Presnall
  * @author Eduardo Macarron
  */
-public class ManualSqlSessionFactoryBean implements InitializableTransletBean, FactoryBean<SqlSessionFactory> {
+public class ManualSqlSessionFactoryBean implements ActivityContextAware, InitializableBean, FactoryBean<SqlSessionFactory> {
 
     private static final String CONFIG_LOCATION_DELIMITERS = ",;";
 
     private static final Log log = LogFactory.getLog(ManualSqlSessionFactoryBean.class);
+
+    private ActivityContext context;
 
     private DataSource dataSource;
 
@@ -341,7 +346,12 @@ public class ManualSqlSessionFactoryBean implements InitializableTransletBean, F
     }
 
     @Override
-    public void initialize(Translet translet) throws Exception {
+    public void setActivityContext(ActivityContext context) {
+        this.context = context;
+    }
+
+    @Override
+    public void initialize() throws Exception {
         if(sqlSessionFactory == null) {
             if(dataSource == null) {
                 throw new IllegalArgumentException("Property 'dataSource' is required");
@@ -352,7 +362,7 @@ public class ManualSqlSessionFactoryBean implements InitializableTransletBean, F
                 mapperInputStreams = new InputStream[mapperLocations.length];
                 for(int i = 0; i < mapperLocations.length; i++) {
                     if(mapperLocations[i] != null) {
-                        File file = translet.getEnvironment().toRealPathAsFile(mapperLocations[i]);
+                        File file = context.getEnvironment().toRealPathAsFile(mapperLocations[i]);
                         mapperInputStreams[i] = new FileInputStream(file);
                     }
                 }

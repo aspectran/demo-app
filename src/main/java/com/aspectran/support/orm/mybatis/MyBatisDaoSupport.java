@@ -15,41 +15,58 @@
  */
 package com.aspectran.support.orm.mybatis;
 
-import com.aspectran.core.activity.Translet;
+import com.aspectran.core.component.bean.aware.ActivityContextAware;
+import com.aspectran.core.context.ActivityContext;
 import org.apache.ibatis.session.SqlSession;
 
-public abstract class MyBatisDaoSupport {
+public class MyBatisDaoSupport implements ActivityContextAware {
 
-    private String relevantAspectId;
+    private final String relevantAspectId;
 
-    public String getRelevantAspectId() {
-        return relevantAspectId;
-    }
+    private ActivityContext context;
 
-    public void setRelevantAspectId(String relevantAspectId) {
+    public MyBatisDaoSupport(String relevantAspectId) {
+        if (relevantAspectId == null) {
+            throw new IllegalArgumentException("relevantAspectId can not be null");
+        }
         this.relevantAspectId = relevantAspectId;
     }
 
-    public SqlSession getSqlSession(Translet translet) {
-        return getSqlSession(translet, relevantAspectId);
+    protected String getRelevantAspectId() {
+        return relevantAspectId;
     }
 
-    public SqlSession getSqlSession(Translet translet, String relevantAspectId) {
-        if (relevantAspectId == null) {
-            throw new IllegalArgumentException("No Aspect associated with " + this);
-        }
+    protected SqlSession getSqlSession() {
+        return getSqlSession(relevantAspectId);
+    }
 
-        SqlSessionTxAdvice advice = translet.getAspectAdviceBean(relevantAspectId);
-        if (advice == null) {
-            throw new IllegalArgumentException("SqlSessionTxAdvice is not defined");
-        }
-
+    protected SqlSession getSqlSession(String relevantAspectId) {
+        SqlSessionTxAdvice advice = getAspectAdviceBean(relevantAspectId);
         SqlSession sqlSession = advice.getSqlSession();
         if (sqlSession == null) {
             throw new IllegalArgumentException("SqlSession is not opened");
         }
-
         return sqlSession;
+    }
+
+    private SqlSessionTxAdvice getAspectAdviceBean(String relevantAspectId) {
+        if (context == null) {
+            throw new IllegalArgumentException("ActivityContext is not injected");
+        }
+        SqlSessionTxAdvice advice = context.getCurrentActivity().getTranslet().getAspectAdviceBean(relevantAspectId);
+        if (advice == null) {
+            if (context.getAspectRuleRegistry().getAspectRule(relevantAspectId) == null) {
+                throw new IllegalArgumentException("Aspect '" + relevantAspectId + "' handling SqlSessionTxAdvice is undefined");
+            } else {
+                throw new IllegalArgumentException("SqlSessionTxAdvice is not defined");
+            }
+        }
+        return advice;
+    }
+
+    @Override
+    public void setActivityContext(ActivityContext context) {
+        this.context = context;
     }
 
 }
