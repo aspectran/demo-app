@@ -8,6 +8,9 @@ context: {
         app.demo
     ]
     profiles: {
+        active: [
+            h2
+        ]
     }
     hybridLoad: false
     autoReload: {

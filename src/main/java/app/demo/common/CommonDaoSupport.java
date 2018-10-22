@@ -1,4 +1,4 @@
-package app.demo.examples.mybatis;
+package app.demo.common;
 
 import com.aspectran.support.orm.mybatis.MyBatisDaoSupport;
 

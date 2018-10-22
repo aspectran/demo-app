@@ -9,7 +9,17 @@
         always start with a forward slash (/).
     </description>
 
-    <environment>
+    <environment profile="h2">
+        <properties>
+            <item name="mybatis.environment" value="default"/>
+            <item name="mybatis.db.driver" value="%{classpath:memo.db.properties^driver}"/>
+            <item name="mybatis.db.url" value="%{classpath:memo.db.properties^url}"/>
+            <item name="mybatis.db.username" value="%{classpath:memo.db.properties^username}"/>
+            <item name="mybatis.db.password" value="%{classpath:memo.db.properties^password}"/>
+        </properties>
+    </environment>
+
+    <environment profile="mysql">
         <properties>
             <item name="mybatis.environment" value="default"/>
             <item name="mybatis.db.driver" value="%{classpath:db.encrypted.properties^driver}"/>
@@ -49,7 +59,7 @@
         </description>
         <joinpoint target="translet">
             pointcut: {
-                +: **@**.*Dao^get*,select*,insert*,update*,delete*
+                +: **@**.*Dao
             }
         </joinpoint>
         <advice bean="sqlSessionTxAdvice">

@@ -1,0 +1,46 @@
+<!DOCTYPE aspectran PUBLIC "-//ASPECTRAN//DTD Aspectran Configuration 5.0//EN"
+        "http://aspectran.github.io/dtd/aspectran-5.dtd">
+
+<aspectran>
+
+    <settings>
+        <setting name="transletNamePattern" value="memo-*"/>
+    </settings>
+
+    <translet name="list">
+        <transform type="transform/json">
+            <action bean="memoAction" method="getList"/>
+        </transform>
+    </translet>
+
+    <translet name="add">
+        <parameters>
+            <item name="message" mandatory="true"/>
+        </parameters>
+        <transform type="transform/json">
+            <action bean="memoAction" method="addMemo"/>
+        </transform>
+    </translet>
+
+    <translet name="add ${message}">
+        <transform type="transform/json">
+            <action bean="memoAction" method="addMemo"/>
+        </transform>
+    </translet>
+
+    <translet name="del">
+        <parameters>
+            <item name="id" mandatory="true"/>
+        </parameters>
+        <transform type="transform/json">
+            <action bean="memoAction" method="delMemo"/>
+        </transform>
+    </translet>
+
+    <translet name="del ${id}">
+        <transform type="transform/json">
+            <action bean="memoAction" method="delMemo"/>
+        </transform>
+    </translet>
+
+</aspectran>
