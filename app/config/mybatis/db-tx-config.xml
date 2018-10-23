@@ -64,6 +64,7 @@
             pointcut: {
                 +: **@class:**.*Dao
                 -: **@class:**.*BatchDao
+                -: **@class:**.CustomerDao
             }
         </joinpoint>
         <advice bean="defaultTxAdvice">
@@ -86,6 +87,7 @@
         <joinpoint target="translet">
             pointcut: {
                 +: **@class:**.*BatchDao
+                -: **@class:**.CustomerDao
             }
         </joinpoint>
         <advice bean="defaultTxAdvice">
