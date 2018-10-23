@@ -1,13 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE aspectran PUBLIC "-//ASPECTRAN//DTD Aspectran Configuration 5.0//EN"
         "http://aspectran.github.io/dtd/aspectran-5.dtd">
-
 <aspectran>
 
     <description>
         Configuration for Database Transactions.
     </description>
 
-    <!-- Profile for using H2 Database -->
+    <!-- Environment for using H2 Database -->
     <environment profile="h2">
         <properties>
             <item name="mybatis.environment" value="default"/>
@@ -18,7 +18,7 @@
         </properties>
     </environment>
 
-    <!-- Profile for using MySql -->
+    <!-- Environment for using MySql -->
     <environment profile="mysql">
         <properties>
             <item name="mybatis.environment" value="default"/>
@@ -58,7 +58,7 @@
 
     <aspect id="defaultTxAspect">
         <description>
-            Advice to handle database transactions.
+            Advice to handle database transactions in simple mode.
         </description>
         <joinpoint target="translet">
             pointcut: {
@@ -81,7 +81,7 @@
 
     <aspect id="batchTxAspect">
         <description>
-            Advice to handle database transactions.
+            Advice to handle database transactions in batch mode.
         </description>
         <joinpoint target="translet">
             pointcut: {

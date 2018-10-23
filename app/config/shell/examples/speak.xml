@@ -1,6 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE aspectran PUBLIC "-//ASPECTRAN//DTD Aspectran Configuration 5.0//EN"
         "http://aspectran.github.io/dtd/aspectran-5.dtd">
-
 <aspectran>
 
     <description>
@@ -19,6 +19,7 @@
     <translet name="speak">
         <description style="apon">
             |
+            |   Converts any written text into spoken words.
             |   If your system's audio works well, it will speak the text you type.
             |
         </description>
