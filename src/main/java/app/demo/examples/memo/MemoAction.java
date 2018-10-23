@@ -14,21 +14,38 @@ import java.util.Map;
 public class MemoAction {
 
     @Autowired
-    public MemoDao sampleDao;
+    public MemoDao memoDao;
+
+    @Autowired
+    public MemoBatchDao memoBatchDao;
 
     public List<?> getList() {
-        return sampleDao.getList();
+        return memoDao.getList();
     }
 
     public Map<String, ?> addMemo(Translet translet) {
-        int id = sampleDao.insertMemo(translet.getAllParameters());
-        return sampleDao.getMemo(new HashMap<String, Object>() {{
+        int id = memoDao.insertMemo(translet.getAllParameters());
+        return memoDao.getMemo(new HashMap<String, Object>() {{
             put("id", id);
         }});
     }
 
     public boolean delMemo(Translet translet) {
-        return sampleDao.deleteMemo(translet.getAllParameters());
+        return memoDao.deleteMemo(translet.getAllParameters());
+    }
+
+    public int delAllMemo() {
+        return memoDao.deleteAllMemo();
+    }
+
+    public int addBulkMemo(Translet translet) {
+        int repetitions = Integer.valueOf(translet.getParameter("repetitions"));
+        int affected = 0;
+        for (int i = 0; i < repetitions; i++) {
+            memoBatchDao.insertBulkMemo(translet.getAllParameters());
+            affected++;
+        }
+        return affected;
     }
 
 }

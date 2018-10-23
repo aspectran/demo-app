@@ -15,6 +15,7 @@
  */
 package com.aspectran.support.orm.mybatis;
 
+import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
@@ -39,6 +40,8 @@ public class SqlSessionTxAdvice {
 
     private final SqlSessionFactory sqlSessionFactory;
 
+    private ExecutorType executorType = ExecutorType.SIMPLE;
+
     private boolean autoCommit;
 
     private SqlSession sqlSession;
@@ -51,18 +54,46 @@ public class SqlSessionTxAdvice {
         this.autoCommit = autoCommit;
     }
 
+    /**
+     * Returns an open SqlSession.
+     * If no SqlSession is open then return null.
+     *
+     * @return a SqlSession instance
+     */
     public SqlSession getSqlSession() {
         return sqlSession;
     }
 
+    /**
+     * Return a new SqlSession instance.
+     * <ul>
+     *     <li>A transaction scope will be started (i.e. NOT auto-commit).</li>
+     *     <li>A Connection object will be acquired from the DataSource instance configured by the active environment.</li>
+     *     <li>The transaction isolation level will be the default used by the driver or data source.</li>
+     *     <li>No PreparedStatements will be reused, and no updates will be batched.</li>
+     * </ul>
+     *
+     * @return a new SqlSession instance
+     */
     public SqlSession open() {
         if(sqlSession == null) {
-            sqlSession = sqlSessionFactory.openSession(autoCommit);
+            sqlSession = sqlSessionFactory.openSession(executorType, autoCommit);
         }
         return sqlSession;
     }
 
     public SqlSession open(boolean autoCommit) {
+        this.autoCommit = autoCommit;
+        return open();
+    }
+
+    public SqlSession open(String executorType) {
+        this.executorType = ExecutorType.valueOf(executorType);
+        return open();
+    }
+
+    public SqlSession open(String executorType, boolean autoCommit) {
+        this.executorType = ExecutorType.valueOf(executorType);
         this.autoCommit = autoCommit;
         return open();
     }
@@ -141,7 +172,7 @@ public class SqlSessionTxAdvice {
 
     private void checkSession() {
         if(sqlSession == null) {
-            throw new IllegalStateException("The SqlSession is not open");
+            throw new IllegalStateException("SqlSession is not open");
         }
     }
 

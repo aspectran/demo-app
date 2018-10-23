@@ -32,20 +32,36 @@ public class MyBatisDaoSupport implements ActivityContextAware {
         this.relevantAspectId = relevantAspectId;
     }
 
-    protected String relevantAspectId() {
+    public String relevantAspectId() {
         return relevantAspectId;
     }
 
-    protected SqlSession sqlSession() {
+    public SqlSession sqlSession() {
         return sqlSession(relevantAspectId);
     }
 
-    protected SqlSession sqlSession(String relevantAspectId) {
+    public SqlSession sqlSession(String relevantAspectId) {
         SqlSession sqlSession = sqlSessionTxAdvice(relevantAspectId).getSqlSession();
         if (sqlSession == null) {
             throw new IllegalArgumentException("SqlSession is not opened");
         }
         return sqlSession;
+    }
+
+    public void commit() {
+        sqlSession().commit();
+    }
+
+    public void commit(boolean force) {
+        sqlSession().commit(force);
+    }
+
+    public void rollback() {
+        sqlSession().rollback();
+    }
+
+    public void rollback(boolean force) {
+        sqlSession().rollback(force);
     }
 
     private SqlSessionTxAdvice sqlSessionTxAdvice(String relevantAspectId) {

@@ -43,4 +43,44 @@
         </transform>
     </translet>
 
+    <translet name="del-all">
+        <action id="affected" bean="memoAction" method="delAllMemo"/>
+        <transform type="transform/text">
+            <template style="apon">
+                |---------------------------------
+                | Total deleted records: @{affected}
+                |---------------------------------
+            </template>
+        </transform>
+    </translet>
+
+    <translet name="add-bulk">
+        <parameters>
+            <item name="repetitions" mandatory="true" defaultValue="10"/>
+            <item name="message" mandatory="true"/>
+        </parameters>
+        <action id="affected" bean="memoAction" method="addBulkMemo"/>
+        <transform type="transform/text">
+            <template style="apon">
+                |---------------------------------
+                | Total inserted records: @{affected}
+                |---------------------------------
+            </template>
+        </transform>
+    </translet>
+
+    <translet name="add-bulk ${message}">
+        <parameters>
+            <item name="repetitions" mandatory="true" defaultValue="10"/>
+        </parameters>
+        <action id="affected" bean="memoAction" method="addBulkMemo"/>
+        <transform type="transform/text">
+            <template style="apon">
+                |---------------------------------
+                | Total inserted records: @{affected}
+                |---------------------------------
+            </template>
+        </transform>
+    </translet>
+
 </aspectran>

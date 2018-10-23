@@ -20,4 +20,8 @@
         delete from memo where id = #{id}
     </insert>
 
+    <insert id="deleteAllMemo">
+        delete from memo
+    </insert>
+
 </mapper>

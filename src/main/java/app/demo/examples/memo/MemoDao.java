@@ -1,6 +1,6 @@
 package app.demo.examples.memo;
 
-import app.demo.common.CommonDaoSupport;
+import app.demo.common.dao.AbstractDefaultDao;
 import com.aspectran.core.component.bean.annotation.Bean;
 import com.aspectran.core.component.bean.annotation.Component;
 
@@ -9,7 +9,7 @@ import java.util.Map;
 
 @Component
 @Bean("memoDao")
-public class MemoDao extends CommonDaoSupport {
+public class MemoDao extends AbstractDefaultDao {
 
     public MemoDao() {
         super();
@@ -30,6 +30,10 @@ public class MemoDao extends CommonDaoSupport {
 
     public boolean deleteMemo(Map<String, Object> params) {
         return (sqlSession().delete("memo.deleteMemo", params) > 0);
+    }
+
+    public int deleteAllMemo() {
+        return sqlSession().delete("memo.deleteAllMemo");
     }
 
 }
