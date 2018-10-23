@@ -16,24 +16,24 @@ public class MemoDao extends AbstractDefaultDao {
     }
 
     public Map<String, ?> getMemo(Map<String, Object> params) {
-        return sqlSession().selectOne("memo.selectMemo", params);
+        return getSqlSession().selectOne("memo.selectMemo", params);
     }
 
     public List<?> getList() {
-        return sqlSession().selectList("memo.selectMemoList");
+        return getSqlSession().selectList("memo.selectMemoList");
     }
 
     public int insertMemo(Map<String, Object> params) {
-        sqlSession().insert("memo.insertMemo", params);
+        getSqlSession().insert("memo.insertMemo", params);
         return Integer.valueOf(params.get("id").toString());
     }
 
     public boolean deleteMemo(Map<String, Object> params) {
-        return (sqlSession().delete("memo.deleteMemo", params) > 0);
+        return (getSqlSession().delete("memo.deleteMemo", params) > 0);
     }
 
     public int deleteAllMemo() {
-        return sqlSession().delete("memo.deleteAllMemo");
+        return getSqlSession().delete("memo.deleteAllMemo");
     }
 
 }

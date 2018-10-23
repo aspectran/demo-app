@@ -40,7 +40,7 @@ public class SqlSessionTxAdvice {
 
     private final SqlSessionFactory sqlSessionFactory;
 
-    private ExecutorType executorType = ExecutorType.SIMPLE;
+    private ExecutorType executorType;
 
     private boolean autoCommit;
 
@@ -77,6 +77,9 @@ public class SqlSessionTxAdvice {
      */
     public SqlSession open() {
         if(sqlSession == null) {
+            if (executorType == null) {
+                executorType = ExecutorType.SIMPLE;
+            }
             sqlSession = sqlSessionFactory.openSession(executorType, autoCommit);
         }
         return sqlSession;

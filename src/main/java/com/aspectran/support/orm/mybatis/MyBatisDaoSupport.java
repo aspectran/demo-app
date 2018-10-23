@@ -32,16 +32,16 @@ public class MyBatisDaoSupport implements ActivityContextAware {
         this.relevantAspectId = relevantAspectId;
     }
 
-    public String relevantAspectId() {
+    public String getRelevantAspectId() {
         return relevantAspectId;
     }
 
-    public SqlSession sqlSession() {
-        return sqlSession(relevantAspectId);
+    public SqlSession getSqlSession() {
+        return getSqlSession(relevantAspectId);
     }
 
-    public SqlSession sqlSession(String relevantAspectId) {
-        SqlSession sqlSession = sqlSessionTxAdvice(relevantAspectId).getSqlSession();
+    public SqlSession getSqlSession(String relevantAspectId) {
+        SqlSession sqlSession = getSqlSessionTxAdvice(relevantAspectId).getSqlSession();
         if (sqlSession == null) {
             throw new IllegalArgumentException("SqlSession is not opened");
         }
@@ -49,22 +49,22 @@ public class MyBatisDaoSupport implements ActivityContextAware {
     }
 
     public void commit() {
-        sqlSession().commit();
+        getSqlSession().commit();
     }
 
     public void commit(boolean force) {
-        sqlSession().commit(force);
+        getSqlSession().commit(force);
     }
 
     public void rollback() {
-        sqlSession().rollback();
+        getSqlSession().rollback();
     }
 
     public void rollback(boolean force) {
-        sqlSession().rollback(force);
+        getSqlSession().rollback(force);
     }
 
-    private SqlSessionTxAdvice sqlSessionTxAdvice(String relevantAspectId) {
+    private SqlSessionTxAdvice getSqlSessionTxAdvice(String relevantAspectId) {
         if (context == null) {
             throw new IllegalArgumentException("ActivityContext is not injected");
         }

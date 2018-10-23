@@ -15,7 +15,7 @@ public class MemoBatchDao extends AbstractBatchDao {
     }
 
     public void insertBulkMemo(Map<String, Object> params) {
-        sqlSession().insert("memo.insertMemo", params);
+        getSqlSession().insert("memo.insertMemo", params);
     }
 
 }
