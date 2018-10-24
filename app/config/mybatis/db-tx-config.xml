@@ -56,15 +56,13 @@
         </constructor>
     </bean>
 
-    <aspect id="defaultTxAspect">
+    <aspect id="defaultSimpleTxAspect">
         <description>
             Advice to handle database transactions in simple mode.
         </description>
         <joinpoint target="translet">
             pointcut: {
-                +: **@class:**.*Dao
-                -: **@class:**.*BatchDao
-                -: **@class:**.CustomerDao
+                +: **@class:**.common.dao.DefaultSimpleDao
             }
         </joinpoint>
         <advice bean="defaultTxAdvice">
@@ -80,14 +78,13 @@
         </advice>
     </aspect>
 
-    <aspect id="batchTxAspect">
+    <aspect id="defaultBatchTxAspect">
         <description>
             Advice to handle database transactions in batch mode.
         </description>
         <joinpoint target="translet">
             pointcut: {
-                +: **@class:**.*BatchDao
-                -: **@class:**.CustomerDao
+                +: **@class:**.common.dao.DefaultBatchDao
             }
         </joinpoint>
         <advice bean="defaultTxAdvice">
@@ -95,6 +92,32 @@
                 <action method="open">
                     <arguments>
                         <item name="executorType" value="BATCH"/>
+                    </arguments>
+                </action>
+            </before>
+            <after>
+                <action method="commit"/>
+            </after>
+            <finally>
+                <action method="close"/>
+            </finally>
+        </advice>
+    </aspect>
+
+    <aspect id="defaultReuseTxAspect">
+        <description>
+            Advice to handle database transactions in reuse mode.
+        </description>
+        <joinpoint target="translet">
+            pointcut: {
+                +: **@class:**.common.dao.DefaultReuseDao
+            }
+        </joinpoint>
+        <advice bean="defaultTxAdvice">
+            <before>
+                <action method="open">
+                    <arguments>
+                        <item name="executorType" value="REUSE"/>
                     </arguments>
                 </action>
             </before>

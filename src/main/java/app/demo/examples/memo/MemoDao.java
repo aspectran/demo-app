@@ -1,6 +1,7 @@
 package app.demo.examples.memo;
 
-import app.demo.common.dao.AbstractDefaultDao;
+import app.demo.common.dao.DefaultSimpleDao;
+import com.aspectran.core.component.bean.annotation.Autowired;
 import com.aspectran.core.component.bean.annotation.Bean;
 import com.aspectran.core.component.bean.annotation.Component;
 
@@ -9,31 +10,34 @@ import java.util.Map;
 
 @Component
 @Bean("memoDao")
-public class MemoDao extends AbstractDefaultDao {
+public class MemoDao {
+
+    @Autowired
+    public DefaultSimpleDao dao;
 
     public MemoDao() {
         super();
     }
 
     public Map<String, ?> getMemo(Map<String, Object> params) {
-        return getSqlSession().selectOne("memo.selectMemo", params);
+        return dao.selectOne("memo.selectMemo", params);
     }
 
     public List<?> getList() {
-        return getSqlSession().selectList("memo.selectMemoList");
+        return dao.selectList("memo.selectMemoList");
     }
 
     public int insertMemo(Map<String, Object> params) {
-        getSqlSession().insert("memo.insertMemo", params);
+        dao.insert("memo.insertMemo", params);
         return Integer.valueOf(params.get("id").toString());
     }
 
     public boolean deleteMemo(Map<String, Object> params) {
-        return (getSqlSession().delete("memo.deleteMemo", params) > 0);
+        return (dao.delete("memo.deleteMemo", params) > 0);
     }
 
     public int deleteAllMemo() {
-        return getSqlSession().delete("memo.deleteAllMemo");
+        return dao.delete("memo.deleteAllMemo");
     }
 
 }

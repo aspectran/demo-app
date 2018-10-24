@@ -24,7 +24,15 @@
 
     <translet name="add ${message}">
         <transform type="transform/json">
-            <action bean="memoAction" method="addMemo"/>
+            <action id="affected" bean="memoDao" method="insert">
+                <arguments>
+                    <item>memo.insertMemo</item>
+                    <item type="map">
+                        <value name="message">${message}</value>
+                    </item>
+                </arguments>
+            </action>
+
         </transform>
     </translet>
 
