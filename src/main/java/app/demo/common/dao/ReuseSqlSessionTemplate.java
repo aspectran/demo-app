@@ -3,15 +3,15 @@ package app.demo.common.dao;
 import com.aspectran.core.component.bean.annotation.AvoidAdvice;
 import com.aspectran.core.component.bean.annotation.Bean;
 import com.aspectran.core.component.bean.annotation.Component;
-import com.aspectran.support.orm.mybatis.MyBatisDaoSupport;
+import com.aspectran.with.mybatis.SqlSessionTemplate;
 
 @Component
-@Bean("defaultReuseDao")
+@Bean("reuseSqlSessionTemplate")
 @AvoidAdvice
-public class DefaultReuseDao extends MyBatisDaoSupport {
+public class ReuseSqlSessionTemplate extends SqlSessionTemplate {
 
-    public DefaultReuseDao() {
-        super("defaultReuseTxAspect");
+    public ReuseSqlSessionTemplate() {
+        super("reuseTxAspect");
     }
 
 }

@@ -18,6 +18,7 @@ package app.demo.examples.upload;
 import com.aspectran.core.activity.Translet;
 import com.aspectran.core.activity.request.parameter.FileParameter;
 import com.aspectran.core.component.bean.annotation.Action;
+import com.aspectran.core.component.bean.annotation.AvoidAdvice;
 import com.aspectran.core.component.bean.annotation.Component;
 import com.aspectran.core.component.bean.annotation.RequestAsDelete;
 import com.aspectran.core.component.bean.annotation.RequestAsGet;
@@ -52,10 +53,12 @@ public class SimpleFileUploadAction {
 
     private int maxFiles = 30;
 
+    @AvoidAdvice
     public void setMaxFiles(int maxFiles) {
         this.maxFiles = maxFiles;
     }
 
+    @AvoidAdvice
     public int getMaxFiles() {
         return maxFiles;
     }

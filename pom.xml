@@ -91,12 +91,17 @@
         </dependency>
         <dependency>
             <groupId>com.aspectran</groupId>
+            <artifactId>aspectran-daemon</artifactId>
+            <version>${aspectran.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.aspectran</groupId>
             <artifactId>aspectran-with-jetty</artifactId>
             <version>${aspectran.version}</version>
         </dependency>
         <dependency>
             <groupId>com.aspectran</groupId>
-            <artifactId>aspectran-daemon</artifactId>
+            <artifactId>aspectran-with-mybatis</artifactId>
             <version>${aspectran.version}</version>
         </dependency>
         <dependency>
@@ -142,11 +147,6 @@
             <groupId>net.sf.sociaal</groupId>
             <artifactId>freetts</artifactId>
             <version>1.2.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.mybatis</groupId>
-            <artifactId>mybatis</artifactId>
-            <version>3.4.6</version>
         </dependency>
         <dependency>
             <groupId>org.mariadb.jdbc</groupId>

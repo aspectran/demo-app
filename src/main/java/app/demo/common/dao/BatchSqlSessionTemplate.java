@@ -3,15 +3,15 @@ package app.demo.common.dao;
 import com.aspectran.core.component.bean.annotation.AvoidAdvice;
 import com.aspectran.core.component.bean.annotation.Bean;
 import com.aspectran.core.component.bean.annotation.Component;
-import com.aspectran.support.orm.mybatis.MyBatisDaoSupport;
+import com.aspectran.with.mybatis.SqlSessionTemplate;
 
 @Component
-@Bean("defaultBatchDao")
+@Bean("batchSqlSessionTemplate")
 @AvoidAdvice
-public class DefaultBatchDao extends MyBatisDaoSupport {
+public class BatchSqlSessionTemplate extends SqlSessionTemplate {
 
-    public DefaultBatchDao() {
-        super("defaultBatchTxAspect");
+    public BatchSqlSessionTemplate() {
+        super("batchTxAspect");
     }
 
 }
