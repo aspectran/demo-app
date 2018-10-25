@@ -1,6 +1,6 @@
 package app.demo.examples.memo;
 
-import app.demo.common.dao.BatchSqlSessionTemplate;
+import app.demo.common.dao.BatchSqlSession;
 import com.aspectran.core.component.bean.annotation.Autowired;
 import com.aspectran.core.component.bean.annotation.Bean;
 import com.aspectran.core.component.bean.annotation.Component;
@@ -12,14 +12,14 @@ import java.util.Map;
 public class MemoBatchDao {
 
     @Autowired
-    public BatchSqlSessionTemplate sqlSessionTemplate;
+    public BatchSqlSession sqlSession;
 
     public MemoBatchDao() {
         super();
     }
 
     public void insertBulkMemo(Map<String, Object> params) {
-        sqlSessionTemplate.insert("memo.insertMemo", params);
+        sqlSession.insert("memo.insertMemo", params);
     }
 
 }

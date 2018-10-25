@@ -6,11 +6,11 @@ import com.aspectran.core.component.bean.annotation.Component;
 import com.aspectran.with.mybatis.SqlSessionTemplate;
 
 @Component
-@Bean("batchSqlSessionTemplate")
+@Bean("batchSqlSession")
 @AvoidAdvice
-public class BatchSqlSessionTemplate extends SqlSessionTemplate {
+public class BatchSqlSession extends SqlSessionTemplate {
 
-    public BatchSqlSessionTemplate() {
+    public BatchSqlSession() {
         super("batchTxAspect");
     }
 

@@ -1,6 +1,6 @@
 package app.demo.examples.memo;
 
-import app.demo.common.dao.SimpleSqlSessionTemplate;
+import app.demo.common.dao.SimpleSqlSession;
 import com.aspectran.core.component.bean.annotation.Autowired;
 import com.aspectran.core.component.bean.annotation.Bean;
 import com.aspectran.core.component.bean.annotation.Component;
@@ -13,31 +13,31 @@ import java.util.Map;
 public class MemoDao {
 
     @Autowired
-    public SimpleSqlSessionTemplate sqlSessionTemplate;
+    public SimpleSqlSession sqlSession;
 
     public MemoDao() {
         super();
     }
 
     public Map<String, ?> getMemo(Map<String, Object> params) {
-        return sqlSessionTemplate.selectOne("memo.selectMemo", params);
+        return sqlSession.selectOne("memo.selectMemo", params);
     }
 
     public List<?> getList() {
-        return sqlSessionTemplate.selectList("memo.selectMemoList");
+        return sqlSession.selectList("memo.selectMemoList");
     }
 
     public int insertMemo(Map<String, Object> params) {
-        sqlSessionTemplate.insert("memo.insertMemo", params);
+        sqlSession.insert("memo.insertMemo", params);
         return Integer.valueOf(params.get("id").toString());
     }
 
     public boolean deleteMemo(Map<String, Object> params) {
-        return (sqlSessionTemplate.delete("memo.deleteMemo", params) > 0);
+        return (sqlSession.delete("memo.deleteMemo", params) > 0);
     }
 
     public int deleteAllMemo() {
-        return sqlSessionTemplate.delete("memo.deleteAllMemo");
+        return sqlSession.delete("memo.deleteAllMemo");
     }
 
 }

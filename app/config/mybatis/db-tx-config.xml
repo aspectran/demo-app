@@ -59,10 +59,16 @@
     <aspect id="simpleTxAspect">
         <description>
             Advice to handle database transactions in simple mode.
+            * A transaction scope will be started (i.e. NOT auto-commit).
+            * A Connection object will be acquired from the DataSource instance
+              configured by the active environment.
+            * The transaction isolation level will be the default used by the driver or
+              data source.
+            * No PreparedStatements will be reused, and no updates will be batched.
         </description>
         <joinpoint target="translet">
             pointcut: {
-                +: **@simpleSqlSessionTemplate
+                +: **@simpleSqlSession
             }
         </joinpoint>
         <advice bean="sqlSessionTxAdvice">
@@ -81,10 +87,11 @@
     <aspect id="batchTxAspect">
         <description>
             Advice to handle database transactions in batch mode.
+            Batches all updates (including inserts and deletes), SELECTs can be run as needed.
         </description>
         <joinpoint target="translet">
             pointcut: {
-                +: **@batchSqlSessionTemplate
+                +: **@batchSqlSession
             }
         </joinpoint>
         <advice bean="sqlSessionTxAdvice">
@@ -107,10 +114,11 @@
     <aspect id="reuseTxAspect">
         <description>
             Advice to handle database transactions in reuse mode.
+            PreparedStatements will be reused.
         </description>
         <joinpoint target="translet">
             pointcut: {
-                +: **@reuseSqlSessionTemplate
+                +: **@reuseSqlSession
             }
         </joinpoint>
         <advice bean="sqlSessionTxAdvice">

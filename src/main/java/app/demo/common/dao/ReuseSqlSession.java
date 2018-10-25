@@ -6,11 +6,11 @@ import com.aspectran.core.component.bean.annotation.Component;
 import com.aspectran.with.mybatis.SqlSessionTemplate;
 
 @Component
-@Bean("reuseSqlSessionTemplate")
+@Bean("reuseSqlSession")
 @AvoidAdvice
-public class ReuseSqlSessionTemplate extends SqlSessionTemplate {
+public class ReuseSqlSession extends SqlSessionTemplate {
 
-    public ReuseSqlSessionTemplate() {
+    public ReuseSqlSession() {
         super("reuseTxAspect");
     }
 

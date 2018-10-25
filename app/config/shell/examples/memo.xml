@@ -24,7 +24,7 @@
 
     <translet name="add ${message}">
         <transform type="transform/json">
-            <action id="affected" bean="simpleSqlSessionTemplate" method="insert">
+            <action id="affected" bean="simpleSqlSession" method="insert">
                 <arguments>
                     <item>memo.insertMemo</item>
                     <item type="map">
