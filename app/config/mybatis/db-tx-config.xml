@@ -56,7 +56,7 @@
         </constructor>
     </bean>
 
-    <aspect id="simpleTxAspect">
+    <aspect id="simpleTxAspect" order="0" isolated="true">
         <description>
             Advice to handle database transactions in simple mode.
             * A transaction scope will be started (i.e. NOT auto-commit).
@@ -84,7 +84,7 @@
         </advice>
     </aspect>
 
-    <aspect id="batchTxAspect">
+    <aspect id="batchTxAspect" order="0" isolated="true">
         <description>
             Advice to handle database transactions in batch mode.
             Batches all updates (including inserts and deletes), SELECTs can be run as needed.
@@ -111,7 +111,7 @@
         </advice>
     </aspect>
 
-    <aspect id="reuseTxAspect">
+    <aspect id="reuseTxAspect" order="0" isolated="true">
         <description>
             Advice to handle database transactions in reuse mode.
             PreparedStatements will be reused.
