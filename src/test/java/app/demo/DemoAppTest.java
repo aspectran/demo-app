@@ -37,8 +37,7 @@ public class DemoAppTest {
             File aspectranConfigFile = new File(root, "config/aspectran-config.apon");
 
             Console console = new JLineConsole(root.getCanonicalPath());
-            ShellService service = ShellService.create(aspectranConfigFile, console);
-            service.start();
+            ShellService service = ShellService.run(aspectranConfigFile, console);
             ShellCommander commander = new ShellCommander(service);
             commander.perform();
         } catch (Exception e) {
