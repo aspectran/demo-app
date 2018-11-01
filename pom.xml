@@ -37,12 +37,12 @@
                 </configuration>
             </plugin>
             <plugin>
-            <artifactId>maven-jar-plugin</artifactId>
-            <version>3.1.0</version>
-            <configuration>
-                <outputDirectory>app/lib</outputDirectory>
-            </configuration>
-        </plugin>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <outputDirectory>app/lib</outputDirectory>
+                </configuration>
+            </plugin>
             <plugin>
                 <artifactId>maven-dependency-plugin</artifactId>
                 <version>3.1.1</version>
