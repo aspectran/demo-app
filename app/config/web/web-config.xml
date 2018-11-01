@@ -40,7 +40,6 @@
         </joinpoint>
         <settings>
             <setting name="characterEncoding" value="utf-8"/>
-            <setting name="contentEncoding" value="gzip"/>
             <setting name="viewDispatcher" value="jspViewDispatcher"/>
         </settings>
     </aspect>
