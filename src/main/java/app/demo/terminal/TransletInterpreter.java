@@ -51,7 +51,7 @@ import java.util.Set;
 @Bean ("transletInterpreter")
 public class TransletInterpreter implements ActivityContextAware {
 
-    private final Log log = LogFactory.getLog(TransletInterpreter.class);
+    private static final Log log = LogFactory.getLog(TransletInterpreter.class);
 
     private static final String COMMAND_PREFIX = "/terminal/";
 
