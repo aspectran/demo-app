@@ -8,6 +8,14 @@
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
+  <filter>
+    <filter-name>web-activity-filter</filter-name>
+    <filter-class>com.aspectran.web.startup.filter.WebActivityFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>web-activity-filter</filter-name>
+    <servlet-name>web-activity-servlet</servlet-name>
+  </filter-mapping>
   <servlet>
     <servlet-name>web-activity-servlet</servlet-name>
     <servlet-class>com.aspectran.web.startup.servlet.WebActivityServlet</servlet-class>
