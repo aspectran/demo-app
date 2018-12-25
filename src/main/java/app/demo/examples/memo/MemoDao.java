@@ -12,11 +12,11 @@ import java.util.Map;
 @Bean("memoDao")
 public class MemoDao {
 
-    @Autowired
-    public SimpleSqlSession sqlSession;
+    private final SimpleSqlSession sqlSession;
 
-    public MemoDao() {
-        super();
+    @Autowired
+    public MemoDao(SimpleSqlSession sqlSession) {
+        this.sqlSession = sqlSession;
     }
 
     public Map<String, ?> getMemo(Map<String, Object> params) {

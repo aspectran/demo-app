@@ -11,11 +11,11 @@ import java.util.Map;
 @Bean("memoBatchDao")
 public class MemoBatchDao {
 
-    @Autowired
-    public BatchSqlSession sqlSession;
+    private final BatchSqlSession sqlSession;
 
-    public MemoBatchDao() {
-        super();
+    @Autowired
+    public MemoBatchDao(BatchSqlSession sqlSession) {
+        this.sqlSession = sqlSession;
     }
 
     public void insertBulkMemo(Map<String, Object> params) {
