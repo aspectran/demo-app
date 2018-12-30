@@ -38,6 +38,7 @@ fi
 
 "$JAVA_BIN" \
     ${JAVA_OPTS} \
+    --illegal-access=deny \
     -Dlogback.configurationFile="$LOGGING_CONFIG" \
     -Daspectran.baseDir="$BASE_DIR" \
     -classpath "$CLASSPATH" \
