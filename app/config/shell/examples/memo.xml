@@ -8,46 +8,41 @@
     </settings>
 
     <translet name="list">
-        <transform type="transform/json">
-            <action bean="memoAction" method="getList"/>
-        </transform>
+        <action bean="memoAction" method="getList"/>
+        <transform type="transform/json"/>
     </translet>
 
     <translet name="add">
         <parameters>
             <item name="message" mandatory="true"/>
         </parameters>
-        <transform type="transform/json">
-            <action bean="memoAction" method="addMemo"/>
-        </transform>
+        <action bean="memoAction" method="addMemo"/>
+        <transform type="transform/json"/>
     </translet>
 
     <translet name="add ${message}">
-        <transform type="transform/json">
-            <action id="affected" bean="simpleSqlSession" method="insert">
-                <arguments>
-                    <item>memo.insertMemo</item>
-                    <item type="map">
-                        <value name="message">${message}</value>
-                    </item>
-                </arguments>
-            </action>
-        </transform>
+        <action id="affected" bean="simpleSqlSession" method="insert">
+            <arguments>
+                <item>memo.insertMemo</item>
+                <item type="map">
+                    <value name="message">${message}</value>
+                </item>
+            </arguments>
+        </action>
+        <transform type="transform/json"/>
     </translet>
 
     <translet name="del">
         <parameters>
             <item name="id" mandatory="true"/>
         </parameters>
-        <transform type="transform/json">
-            <action bean="memoAction" method="delMemo"/>
-        </transform>
+        <action bean="memoAction" method="delMemo"/>
+        <transform type="transform/json"/>
     </translet>
 
     <translet name="del ${id}">
-        <transform type="transform/json">
-            <action bean="memoAction" method="delMemo"/>
-        </transform>
+        <action bean="memoAction" method="delMemo"/>
+        <transform type="transform/json"/>
     </translet>
 
     <translet name="del-all">
