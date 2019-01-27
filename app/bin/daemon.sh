@@ -79,14 +79,13 @@ do_start() {
         echo "Aspectran daemon is already running."
         exit 1
     else
-        echo "Starting the Aspectran daemon..."
         rm -f "$DAEMON_OUT"
         nohup "$JAVA_BIN" \
             $JAVA_OPTS \
             -classpath "$CLASSPATH" \
             -Djava.io.tmpdir="$TMP_DIR" \
             -Dlogback.configurationFile="$LOGGING_CONFIG" \
-            -Daspectran.baseDir="$BASE_DIR" \
+            -Daspectran.basePath="$BASE_DIR" \
             $DAEMON_MAIN \
             "$ASPECTRAN_CONFIG" \
             > "$DAEMON_OUT" 2>&1 &

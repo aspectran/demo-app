@@ -31,7 +31,6 @@ daemon: {
         com.aspectran.daemon.command.builtins.BeanMethodActionCommand
         com.aspectran.daemon.command.builtins.BeanMethodActionCommand
         com.aspectran.daemon.command.builtins.TransletCommand
-        com.aspectran.daemon.command.builtins.TemplateCommand
         com.aspectran.daemon.command.builtins.PollingIntervalCommand
         com.aspectran.daemon.command.builtins.RestartCommand
         com.aspectran.daemon.command.builtins.QuitCommand
@@ -47,7 +46,7 @@ daemon: {
     }
 }
 shell: {
-    prompt: "{{GREEN}}demo-app>{{reset}} "
+    prompt: "{{green}}demo-app>{{reset}} "
     commands: [
         com.aspectran.shell.command.builtins.JettyCommand
         com.aspectran.shell.command.builtins.TransletCommand

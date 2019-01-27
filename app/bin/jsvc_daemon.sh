@@ -102,7 +102,6 @@ ASPECTRAN_CONFIG="$BASE_DIR/config/aspectran-config.apon"
 DAEMON_MAIN="com.aspectran.daemon.JsvcDaemon"
 
 do_start() {
-    echo "Starting the Aspectran daemon..."
     > "$DAEMON_OUT"
     "$JSVC" \
         $JAVA_OPTS \
@@ -116,17 +115,17 @@ do_start() {
         -classpath "$CLASSPATH" \
         -Djava.io.tmpdir="$TMP_DIR" \
         -Dlogback.configurationFile="$LOGGING_CONFIG" \
-        -Daspectran.baseDir="$BASE_DIR" \
+        -Daspectran.basePath="$BASE_DIR" \
         ${ASPECTRAN_OPTS} \
         $DAEMON_MAIN \
         "$ASPECTRAN_CONFIG"
+    sleep 0.2
     if [ -e "$DAEMON_OUT" ]; then
         cat "$DAEMON_OUT"
     fi
 }
 
 do_stop() {
-    echo "Stopping the Aspectran daemon..."
     > "$DAEMON_OUT"
     "$JSVC" \
         $JAVA_OPTS \
@@ -136,6 +135,7 @@ do_stop() {
         -classpath "$CLASSPATH" \
         -Djava.io.tmpdir="$TMP_DIR" \
         $DAEMON_MAIN
+    sleep 0.2
     if [ -e "$DAEMON_OUT" ]; then
         cat "$DAEMON_OUT"
     fi
@@ -145,7 +145,7 @@ do_version() {
     "$JAVA_BIN" \
         -classpath "$CLASSPATH" \
         -Dlogback.configurationFile="$LOGGING_CONFIG" \
-        -Daspectran.baseDir="$BASE_DIR" \
+        -Daspectran.basePath="$BASE_DIR" \
         com.aspectran.core.util.Aspectran
 }
 
