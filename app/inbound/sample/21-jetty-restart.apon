@@ -1,9 +1,9 @@
-# Stop the Jetty server
+# Restart the Jetty server
 command: jetty
 parameters: {
     item: {
         name: mode
-        value: stop
+        value: restart
     }
     item: {
         name: server
