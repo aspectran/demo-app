@@ -4,6 +4,7 @@ import app.demo.common.dao.SimpleSqlSession;
 import com.aspectran.core.component.bean.annotation.Autowired;
 import com.aspectran.core.component.bean.annotation.Bean;
 import com.aspectran.core.component.bean.annotation.Component;
+import org.apache.ibatis.session.SqlSession;
 
 import java.util.List;
 import java.util.Map;
@@ -12,28 +13,27 @@ import java.util.Map;
 @Bean("memoDao")
 public class MemoDao {
 
-    private final SimpleSqlSession sqlSession;
+    private final SqlSession sqlSession;
 
     @Autowired
     public MemoDao(SimpleSqlSession sqlSession) {
         this.sqlSession = sqlSession;
     }
 
-    public Map<String, ?> getMemo(Map<String, Object> params) {
-        return sqlSession.selectOne("memo.selectMemo", params);
+    public Map<String, ?> getMemo() {
+        return sqlSession.selectOne("memo.selectMemo");
     }
 
     public List<?> getList() {
         return sqlSession.selectList("memo.selectMemoList");
     }
 
-    public int insertMemo(Map<String, Object> params) {
-        sqlSession.insert("memo.insertMemo", params);
-        return Integer.valueOf(params.get("id").toString());
+    public void insertMemo() {
+        sqlSession.insert("memo.insertMemo");
     }
 
-    public boolean deleteMemo(Map<String, Object> params) {
-        return (sqlSession.delete("memo.deleteMemo", params) > 0);
+    public boolean deleteMemo() {
+        return (sqlSession.delete("memo.deleteMemo") > 0);
     }
 
     public int deleteAllMemo() {

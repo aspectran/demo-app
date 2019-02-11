@@ -12,6 +12,7 @@ public class ReuseSqlSession extends SqlSessionAgent {
 
     public ReuseSqlSession() {
         super("reuseTxAspect");
+        setAutoParameters(true);
     }
 
 }

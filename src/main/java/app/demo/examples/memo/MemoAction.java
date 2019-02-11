@@ -5,7 +5,6 @@ import com.aspectran.core.component.bean.annotation.Autowired;
 import com.aspectran.core.component.bean.annotation.Bean;
 import com.aspectran.core.component.bean.annotation.Component;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,25 +12,27 @@ import java.util.Map;
 @Bean("memoAction")
 public class MemoAction {
 
-    @Autowired
-    public MemoDao memoDao;
+    private MemoDao memoDao;
+
+    private MemoBatchDao memoBatchDao;
 
     @Autowired
-    public MemoBatchDao memoBatchDao;
+    public MemoAction(MemoDao memoDao, MemoBatchDao memoBatchDao) {
+        this.memoDao = memoDao;
+        this.memoBatchDao = memoBatchDao;
+    }
 
     public List<?> getList() {
         return memoDao.getList();
     }
 
     public Map<String, ?> addMemo(Translet translet) {
-        int id = memoDao.insertMemo(translet.getAllParameters());
-        return memoDao.getMemo(new HashMap<String, Object>() {{
-            put("id", id);
-        }});
+        memoDao.insertMemo();
+        return memoDao.getMemo();
     }
 
-    public boolean delMemo(Translet translet) {
-        return memoDao.deleteMemo(translet.getAllParameters());
+    public boolean delMemo() {
+        return memoDao.deleteMemo();
     }
 
     public int delAllMemo() {
@@ -42,7 +43,7 @@ public class MemoAction {
         int repetitions = Integer.valueOf(translet.getParameter("repetitions"));
         int affected = 0;
         for (int i = 0; i < repetitions; i++) {
-            memoBatchDao.insertBulkMemo(translet.getAllParameters());
+            memoBatchDao.insertBulkMemo();
             affected++;
         }
         return affected;
