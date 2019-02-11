@@ -4,6 +4,7 @@ import app.demo.common.dao.BatchSqlSession;
 import com.aspectran.core.component.bean.annotation.Autowired;
 import com.aspectran.core.component.bean.annotation.Bean;
 import com.aspectran.core.component.bean.annotation.Component;
+import org.apache.ibatis.session.SqlSession;
 
 import java.util.Map;
 
@@ -11,7 +12,7 @@ import java.util.Map;
 @Bean("memoBatchDao")
 public class MemoBatchDao {
 
-    private final BatchSqlSession sqlSession;
+    private final SqlSession sqlSession;
 
     @Autowired
     public MemoBatchDao(BatchSqlSession sqlSession) {

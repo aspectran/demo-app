@@ -4,6 +4,7 @@ import app.demo.common.dao.SimpleSqlSession;
 import com.aspectran.core.component.bean.annotation.Autowired;
 import com.aspectran.core.component.bean.annotation.Bean;
 import com.aspectran.core.component.bean.annotation.Component;
+import org.apache.ibatis.session.SqlSession;
 
 import java.util.List;
 import java.util.Map;
@@ -12,7 +13,7 @@ import java.util.Map;
 @Bean("memoDao")
 public class MemoDao {
 
-    private final SimpleSqlSession sqlSession;
+    private final SqlSession sqlSession;
 
     @Autowired
     public MemoDao(SimpleSqlSession sqlSession) {
