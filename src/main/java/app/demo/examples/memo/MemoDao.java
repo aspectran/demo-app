@@ -20,21 +20,20 @@ public class MemoDao {
         this.sqlSession = sqlSession;
     }
 
-    public Map<String, ?> getMemo(Map<String, Object> params) {
-        return sqlSession.selectOne("memo.selectMemo", params);
+    public Map<String, ?> getMemo() {
+        return sqlSession.selectOne("memo.selectMemo");
     }
 
     public List<?> getList() {
         return sqlSession.selectList("memo.selectMemoList");
     }
 
-    public int insertMemo(Map<String, Object> params) {
-        sqlSession.insert("memo.insertMemo", params);
-        return Integer.valueOf(params.get("id").toString());
+    public void insertMemo() {
+        sqlSession.insert("memo.insertMemo");
     }
 
-    public boolean deleteMemo(Map<String, Object> params) {
-        return (sqlSession.delete("memo.deleteMemo", params) > 0);
+    public boolean deleteMemo() {
+        return (sqlSession.delete("memo.deleteMemo") > 0);
     }
 
     public int deleteAllMemo() {

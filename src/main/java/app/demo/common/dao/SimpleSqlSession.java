@@ -12,6 +12,7 @@ public class SimpleSqlSession extends SqlSessionAgent {
 
     public SimpleSqlSession() {
         super("simpleTxAspect");
+        setAutoParameters(true);
     }
 
 }

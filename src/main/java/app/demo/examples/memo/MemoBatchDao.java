@@ -6,8 +6,6 @@ import com.aspectran.core.component.bean.annotation.Bean;
 import com.aspectran.core.component.bean.annotation.Component;
 import org.apache.ibatis.session.SqlSession;
 
-import java.util.Map;
-
 @Component
 @Bean("memoBatchDao")
 public class MemoBatchDao {
@@ -19,8 +17,8 @@ public class MemoBatchDao {
         this.sqlSession = sqlSession;
     }
 
-    public void insertBulkMemo(Map<String, Object> params) {
-        sqlSession.insert("memo.insertMemo", params);
+    public void insertBulkMemo() {
+        sqlSession.insert("memo.insertMemo");
     }
 
 }

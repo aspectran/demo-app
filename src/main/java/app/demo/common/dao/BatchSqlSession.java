@@ -12,6 +12,7 @@ public class BatchSqlSession extends SqlSessionAgent {
 
     public BatchSqlSession() {
         super("batchTxAspect");
+        setAutoParameters(true);
     }
 
 }
