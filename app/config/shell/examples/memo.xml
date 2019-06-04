@@ -58,7 +58,7 @@
 
     <translet name="add-bulk">
         <parameters>
-            <item name="repetitions" mandatory="true" defaultValue="10"/>
+            <item name="repetitions" value="10" mandatory="true"/>
             <item name="message" mandatory="true"/>
         </parameters>
         <action id="affected" bean="memoAction" method="addBulkMemo"/>
@@ -73,7 +73,7 @@
 
     <translet name="add-bulk ${message}">
         <parameters>
-            <item name="repetitions" mandatory="true" defaultValue="10"/>
+            <item name="repetitions" value="10" mandatory="true"/>
         </parameters>
         <action id="affected" bean="memoAction" method="addBulkMemo"/>
         <transform type="transform/text">
