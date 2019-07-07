@@ -25,7 +25,10 @@
         </description>
         <joinpoint target="translet"/>
         <settings>
-            <setting name="indentString" value="  "/>
+            <setting name="format.indentSize" value="2"/>
+            <setting name="format.dateFormat" value="yyyy-MM-dd"/>
+            <setting name="format.dateTimeFormat" value="yyyy-MM-dd HH:mm:ss"/>
+            <setting name="format.nullWritable" value="true"/>
         </settings>
     </aspect>
 
