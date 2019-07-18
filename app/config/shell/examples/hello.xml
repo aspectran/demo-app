@@ -20,10 +20,10 @@
         </joinpoint>
         <advice bean="helloAdvice">
             <before>
-                <action method="welcome"/>
+                <invoke method="welcome"/>
             </before>
             <after>
-                <action method="goodbye"/>
+                <invoke method="goodbye"/>
             </after>
         </advice>
     </aspect>
@@ -38,9 +38,8 @@
             |   the console? If so, try running the "hello2" command.
             |
         </description>
-        <transform type="transform/text">
-            <action id="helloWorld" bean="helloAction" method="helloWorld"/>
-        </transform>
+        <action id="helloWorld" bean="helloAction" method="helloWorld"/>
+        <transform type="text"/>
     </translet>
 
     <translet name="hello2">
@@ -53,7 +52,7 @@
             |
         </description>
         <action id="helloWorld" bean="helloAction" method="helloWorld"/>
-        <transform type="transform/text">
+        <transform type="text">
             <template style="apon">
                 |
                 |   {{bg:green}}                         {{reset}}

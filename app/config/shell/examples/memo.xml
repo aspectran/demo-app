@@ -4,12 +4,12 @@
 <aspectran>
 
     <settings>
-        <setting name="transletNamePattern" value="memo-*"/>
+        <setting name="transletNamePrefix" value="memo-"/>
     </settings>
 
     <translet name="list">
         <action bean="memoAction" method="getList"/>
-        <transform type="transform/json"/>
+        <transform type="json"/>
     </translet>
 
     <translet name="add">
@@ -17,7 +17,7 @@
             <item name="message" mandatory="true"/>
         </parameters>
         <action bean="memoAction" method="addMemo"/>
-        <transform type="transform/json"/>
+        <transform type="json"/>
     </translet>
 
     <translet name="add ${message}">
@@ -25,11 +25,11 @@
             <arguments>
                 <item>memo.insertMemo</item>
                 <item type="map">
-                    <value name="message">${message}</value>
+                    <entry name="message">${message}</entry>
                 </item>
             </arguments>
         </action>
-        <transform type="transform/json"/>
+        <transform type="json"/>
     </translet>
 
     <translet name="del">
@@ -37,17 +37,17 @@
             <item name="id" mandatory="true"/>
         </parameters>
         <action bean="memoAction" method="delMemo"/>
-        <transform type="transform/json"/>
+        <transform type="json"/>
     </translet>
 
     <translet name="del ${id}">
         <action bean="memoAction" method="delMemo"/>
-        <transform type="transform/json"/>
+        <transform type="json"/>
     </translet>
 
     <translet name="del-all">
         <action id="affected" bean="memoAction" method="delAllMemo"/>
-        <transform type="transform/text">
+        <transform type="text">
             <template style="apon">
                 |---------------------------------
                 | Total deleted records: @{affected}
@@ -62,7 +62,7 @@
             <item name="message" mandatory="true"/>
         </parameters>
         <action id="affected" bean="memoAction" method="addBulkMemo"/>
-        <transform type="transform/text">
+        <transform type="text">
             <template style="apon">
                 |---------------------------------
                 | Total inserted records: @{affected}
@@ -76,7 +76,7 @@
             <item name="repetitions" value="10" mandatory="true"/>
         </parameters>
         <action id="affected" bean="memoAction" method="addBulkMemo"/>
-        <transform type="transform/text">
+        <transform type="text">
             <template style="apon">
                 |---------------------------------
                 | Total inserted records: @{affected}
