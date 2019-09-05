@@ -12,9 +12,9 @@ import java.util.Map;
 @Bean("memoAction")
 public class MemoAction {
 
-    private MemoDao memoDao;
+    private final MemoDao memoDao;
 
-    private MemoBatchDao memoBatchDao;
+    private final MemoBatchDao memoBatchDao;
 
     @Autowired
     public MemoAction(MemoDao memoDao, MemoBatchDao memoBatchDao) {
@@ -26,7 +26,7 @@ public class MemoAction {
         return memoDao.getList();
     }
 
-    public Map<String, ?> addMemo(Translet translet) {
+    public Map<String, ?> addMemo() {
         memoDao.insertMemo();
         return memoDao.getMemo();
     }
@@ -40,7 +40,7 @@ public class MemoAction {
     }
 
     public int addBulkMemo(Translet translet) {
-        int repetitions = Integer.valueOf(translet.getParameter("repetitions"));
+        int repetitions = Integer.parseInt(translet.getParameter("repetitions"));
         int affected = 0;
         for (int i = 0; i < repetitions; i++) {
             memoBatchDao.insertBulkMemo();

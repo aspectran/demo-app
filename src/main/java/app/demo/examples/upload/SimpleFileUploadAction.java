@@ -47,7 +47,7 @@ import java.util.UUID;
 @Component("/examples/file-upload")
 public class SimpleFileUploadAction {
 
-    private Log log = LogFactory.getLog(SimpleFileUploadAction.class);
+    private static final Log log = LogFactory.getLog(SimpleFileUploadAction.class);
 
     private final Map<String, UploadedFile> uploadedFiles = new LinkedHashMap<>();
 
@@ -123,7 +123,8 @@ public class SimpleFileUploadAction {
         UploadedFile uploadedFile = uploadedFiles.get(key);
         if (uploadedFile != null) {
             translet.getResponseAdapter().setContentType(uploadedFile.getFileType());
-            translet.getResponseAdapter().setHeader("Content-disposition", "attachment; filename=\"" + uploadedFile.getFileName() + "\"");
+            translet.getResponseAdapter().setHeader("Content-disposition", "attachment; filename=\"" +
+                    uploadedFile.getFileName() + "\"");
             translet.getResponseAdapter().getOutputStream().write(uploadedFile.getBytes());
         } else {
             HttpStatusSetter.setStatus(HttpStatus.NOT_FOUND, translet);
@@ -142,7 +143,7 @@ public class SimpleFileUploadAction {
     @RequestToGet("/files")
     @Transform(TransformType.JSON)
     @Action(id = "files")
-    public Collection list(Translet translet) {
+    public Collection list() {
         return uploadedFiles.values();
     }
 

@@ -10,7 +10,7 @@
     <environment>
         <properties>
             <item name="jetty.startup" value="true" valueType="boolean"/>
-            <item name="jetty.server.port" value="8088" valueType="int"/>
+            <item name="jetty.server.port" value="8080" valueType="int"/>
             <item name="jetty.server.minThreads" value="3" valueType="int"/>
             <item name="jetty.server.maxThreads" value="10" valueType="int"/>
             <item name="jetty.session.dataStoreDir" value="#{basePath}/temp/sessions"/>
@@ -53,13 +53,7 @@
     </bean>
 
     <bean id="jetty.mainHandler" class="org.eclipse.jetty.server.handler.HandlerCollection" scope="prototype">
-        <properties profile="dev">
-            <item name="handlers" type="array">
-                <value>#{jetty.gzipHandler}</value>
-                <value>#{jetty.requestLog}</value>
-            </item>
-        </properties>
-        <properties profile="!dev">
+        <properties>
             <item name="handlers" type="array">
                 <value>#{jetty.gzipHandler}</value>
                 <value>#{jetty.requestLog}</value>
@@ -101,7 +95,7 @@
             <item name="contextPath">/</item>
             <item name="war">#{basePath}/webapps/root</item>
             <item name="persistTempDirectory" valueType="boolean">true</item>
-            <item name="defaultsDescriptor">#{basePath}/config/jetty/webdefault.xml</item>
+            <item name="defaultsDescriptor">#{basePath}/config/server/jetty/webdefault.xml</item>
             <item name="sessionHandler">#{jetty.sessionHandler}</item>
             <item name="derived" valueType="boolean">true</item>
         </properties>

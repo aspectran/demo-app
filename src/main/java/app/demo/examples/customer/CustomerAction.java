@@ -53,7 +53,7 @@ public class CustomerAction {
     
     public Customer insertCustomer(Translet translet) {
         String name = translet.getParameter("name");
-        int age = Integer.valueOf(translet.getParameter("age"));
+        int age = Integer.parseInt(translet.getParameter("age"));
         boolean approved = "Y".equals(translet.getParameter("approved"));
         
         Customer customer = new Customer();
@@ -72,7 +72,7 @@ public class CustomerAction {
     public Customer updateCustomer(Translet translet) {
         int id = Integer.parseInt(translet.getParameter("id"));
         String name = translet.getParameter("name");
-        int age = Integer.valueOf(translet.getParameter("age"));
+        int age = Integer.parseInt(translet.getParameter("age"));
         boolean approved = "Y".equals(translet.getParameter("approved"));
 
         Customer customer = new Customer();

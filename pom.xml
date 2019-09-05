@@ -21,7 +21,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.build.resourceEncoding>UTF-8</project.build.resourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <aspectran.version>6.3.0-SNAPSHOT</aspectran.version>
+        <aspectran.version>6.3.0-RC2-SNAPSHOT</aspectran.version>
     </properties>
     <build>
         <plugins>
@@ -101,6 +101,11 @@
         <dependency>
             <groupId>com.aspectran</groupId>
             <artifactId>aspectran-daemon</artifactId>
+            <version>${aspectran.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.aspectran</groupId>
+            <artifactId>aspectran-with-undertow</artifactId>
             <version>${aspectran.version}</version>
         </dependency>
         <dependency>
