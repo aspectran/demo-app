@@ -9,6 +9,7 @@ context: {
     profiles: {
         active: [
             h2
+            jetty
         ]
     }
     autoReload: {
@@ -42,6 +43,7 @@ shell: {
     )
     prompt: "{{green}}demo-app>{{reset}} "
     commands: [
+        com.aspectran.shell.command.builtins.UndertowCommand
         com.aspectran.shell.command.builtins.JettyCommand
         com.aspectran.shell.command.builtins.TransletCommand
         com.aspectran.shell.command.builtins.AspectCommand

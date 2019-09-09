@@ -25,38 +25,36 @@
 
     <bean id="jetty.server" class="com.aspectran.jetty.JettyServer">
         <arguments>
-            <item name="threadPool">#{jetty.threadPool}</item>
+            <item name="threadPool">
+                <bean class="org.eclipse.jetty.util.thread.QueuedThreadPool">
+                    <properties>
+                        <item name="minThreads">%{jetty.server.minThreads}</item>
+                        <item name="maxThreads">%{jetty.server.maxThreads}</item>
+                    </properties>
+                </bean>
+            </item>
         </arguments>
         <properties>
             <item name="autoStart">%{jetty.startup}</item>
             <item name="connectors" type="array">
-                <value>#{jetty.connector}</value>
+                <bean class="org.eclipse.jetty.server.ServerConnector">
+                    <arguments>
+                        <item>#{jetty.server}</item>
+                    </arguments>
+                    <properties>
+                        <item name="port">%{jetty.server.port}</item>
+                    </properties>
+                </bean>
             </item>
-            <item name="handler">#{jetty.mainHandler}</item>
-        </properties>
-    </bean>
-
-    <bean id="jetty.threadPool" class="org.eclipse.jetty.util.thread.QueuedThreadPool" scope="prototype">
-        <properties>
-            <item name="minThreads">%{jetty.server.minThreads}</item>
-            <item name="maxThreads">%{jetty.server.maxThreads}</item>
-        </properties>
-    </bean>
-
-    <bean id="jetty.connector" class="org.eclipse.jetty.server.ServerConnector" scope="prototype">
-        <arguments>
-            <item>#{jetty.server}</item>
-        </arguments>
-        <properties>
-            <item name="port">%{jetty.server.port}</item>
-        </properties>
-    </bean>
-
-    <bean id="jetty.mainHandler" class="org.eclipse.jetty.server.handler.HandlerCollection" scope="prototype">
-        <properties>
-            <item name="handlers" type="array">
-                <value>#{jetty.gzipHandler}</value>
-                <value>#{jetty.requestLog}</value>
+            <item name="handler">
+                <bean class="org.eclipse.jetty.server.handler.HandlerCollection">
+                    <properties>
+                        <item name="handlers" type="array">
+                            <value>#{jetty.gzipHandler}</value>
+                            <value>#{jetty.requestLogHandler}</value>
+                        </item>
+                    </properties>
+                </bean>
             </item>
         </properties>
     </bean>
@@ -76,68 +74,62 @@
     <bean id="jetty.handlerCollection" class="org.eclipse.jetty.server.handler.HandlerCollection" scope="prototype">
         <properties>
             <item name="handlers" type="array">
-                <value>#{jetty.contexts}</value>
-                <value>#{jetty.defaultHandler}</value>
+                <bean class="org.eclipse.jetty.server.handler.ContextHandlerCollection">
+                    <properties>
+                        <item name="handlers" type="array">
+                            <bean class="com.aspectran.jetty.JettyWebAppContext">
+                                <properties>
+                                    <item name="contextPath">/</item>
+                                    <item name="war">#{basePath}/webapps/root</item>
+                                    <item name="persistTempDirectory" valueType="boolean">true</item>
+                                    <item name="defaultsDescriptor">#{basePath}/config/server/jetty/webdefault.xml</item>
+                                    <item name="sessionHandler">#{jetty.sessionHandler}</item>
+                                    <item name="derived" valueType="boolean">true</item>
+                                </properties>
+                            </bean>
+                        </item>
+                    </properties>
+                </bean>
+                <bean class="org.eclipse.jetty.server.handler.DefaultHandler"/>
             </item>
-        </properties>
-    </bean>
-
-    <bean id="jetty.contexts" class="org.eclipse.jetty.server.handler.ContextHandlerCollection" scope="prototype">
-        <properties>
-            <item name="handlers" type="array">
-                <value>#{jetty.contexts.root}</value>
-            </item>
-        </properties>
-    </bean>
-
-    <bean id="jetty.contexts.root" class="com.aspectran.jetty.JettyWebAppContext" scope="prototype">
-        <properties>
-            <item name="contextPath">/</item>
-            <item name="war">#{basePath}/webapps/root</item>
-            <item name="persistTempDirectory" valueType="boolean">true</item>
-            <item name="defaultsDescriptor">#{basePath}/config/server/jetty/webdefault.xml</item>
-            <item name="sessionHandler">#{jetty.sessionHandler}</item>
-            <item name="derived" valueType="boolean">true</item>
         </properties>
     </bean>
 
     <bean id="jetty.sessionHandler" class="com.aspectran.jetty.JettySessionHandler" scope="prototype">
         <properties>
-            <item name="sessionDataStore">#{jetty.sessionDataStoreFactory}</item>
+            <item name="sessionDataStore">
+                <bean class="org.eclipse.jetty.server.session.FileSessionDataStoreFactory">
+                    <properties>
+                        <item name="storeDir" valueType="file">%{jetty.session.dataStoreDir}</item>
+                        <item name="deleteUnrestorableFiles" valueType="boolean">true</item>
+                    </properties>
+                </bean>
+            </item>
         </properties>
     </bean>
 
-    <bean id="jetty.sessionDataStoreFactory" class="org.eclipse.jetty.server.session.FileSessionDataStoreFactory" scope="prototype">
+    <bean id="jetty.requestLogHandler" class="org.eclipse.jetty.server.handler.RequestLogHandler" scope="prototype">
         <properties>
-            <item name="storeDir" valueType="file">%{jetty.session.dataStoreDir}</item>
-            <item name="deleteUnrestorableFiles" valueType="boolean">true</item>
-        </properties>
-    </bean>
-
-    <bean id="jetty.defaultHandler" class="org.eclipse.jetty.server.handler.DefaultHandler" scope="prototype"/>
-
-    <bean id="jetty.requestLog" class="org.eclipse.jetty.server.handler.RequestLogHandler" scope="prototype">
-        <properties>
-            <item name="requestLog">#{jetty.customRequestLog}</item>
-        </properties>
-    </bean>
-
-    <bean id="jetty.customRequestLog" class="org.eclipse.jetty.server.CustomRequestLog" scope="prototype">
-        <arguments>
-            <item>#{jetty.asyncRequestLogWriter}</item>
-            <item>#{field:org.eclipse.jetty.server.CustomRequestLog^EXTENDED_NCSA_FORMAT}</item>
-        </arguments>
-    </bean>
-
-    <bean id="jetty.asyncRequestLogWriter" class="org.eclipse.jetty.server.AsyncRequestLogWriter" scope="prototype">
-        <arguments>
-            <item>#{basePath}/logs/jetty-yyyy_mm_dd.request.log</item>
-        </arguments>
-        <properties>
-            <item name="filenameDateFormat">yyyy_MM_dd</item>
-            <item name="retainDays" valueType="int">90</item>
-            <item name="append" valueType="boolean">true</item>
-            <item name="timeZone">GMT+9</item>
+            <item name="requestLog">
+                <bean class="org.eclipse.jetty.server.CustomRequestLog">
+                    <arguments>
+                        <item>
+                            <bean class="org.eclipse.jetty.server.AsyncRequestLogWriter">
+                                <arguments>
+                                    <item>#{basePath}/logs/jetty-yyyy_mm_dd.request.log</item>
+                                </arguments>
+                                <properties>
+                                    <item name="filenameDateFormat">yyyy_MM_dd</item>
+                                    <item name="retainDays" valueType="int">90</item>
+                                    <item name="append" valueType="boolean">true</item>
+                                    <item name="timeZone">GMT+9</item>
+                                </properties>
+                            </bean>
+                        </item>
+                        <item tokenize="false">%{client}a - %u %{yyyy-MM-dd HH:mm:ss ZZZ|GMT+9}t "%r" %s %O "%{Referer}i" "%{User-Agent}i"</item>
+                    </arguments>
+                </bean>
+            </item>
         </properties>
     </bean>
 
