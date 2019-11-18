@@ -23,7 +23,6 @@
         <description>
             Specifies the environment variables used during request and response processing.
         </description>
-        <joinpoint target="translet"/>
         <settings>
             <setting name="format.indentSize" value="2"/>
             <setting name="format.dateFormat" value="yyyy-MM-dd"/>
@@ -36,7 +35,7 @@
         <description>
             Specifies the environment variables used during request and response processing.
         </description>
-        <joinpoint target="translet">
+        <joinpoint>
             pointcut: {
                 +: /**
             }

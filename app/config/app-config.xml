@@ -26,7 +26,6 @@
         <description>
             The Activity Data Map of all translets can be referenced as a "data" attribute in View Dispatching.
         </description>
-        <joinpoint target="translet"/>
         <advice>
             <before>
                 <echo>
