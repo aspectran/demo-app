@@ -21,7 +21,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.build.resourceEncoding>UTF-8</project.build.resourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <aspectran.version>6.5.0</aspectran.version>
+        <aspectran.version>6.5.1-SNAPSHOT</aspectran.version>
     </properties>
     <build>
         <plugins>
@@ -117,11 +117,6 @@
             <groupId>com.aspectran</groupId>
             <artifactId>aspectran-with-mybatis</artifactId>
             <version>${aspectran.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-fileupload</groupId>
-            <artifactId>commons-fileupload</artifactId>
-            <version>1.4</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>

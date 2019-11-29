@@ -30,6 +30,7 @@ public class DemoAppTest {
         try {
             File current = ResourceUtils.getResourceAsFile("");
             File root = new File(current, "../../app");
+            System.setProperty("aspectran.basePath", root.getCanonicalPath()); // for logback
             JLineAspectranShell.main(new String[] { root.getCanonicalPath(), "config/aspectran-config.apon" });
         } catch (IOException e) {
             e.printStackTrace();
