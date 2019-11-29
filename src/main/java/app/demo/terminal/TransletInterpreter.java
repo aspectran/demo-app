@@ -15,7 +15,7 @@
  */
 package app.demo.terminal;
 
-import com.aspectran.core.activity.Activity;
+import com.aspectran.core.activity.ActivityException;
 import com.aspectran.core.activity.Translet;
 import com.aspectran.core.activity.TransletNotFoundException;
 import com.aspectran.core.component.bean.annotation.Bean;
@@ -133,20 +133,26 @@ public class TransletInterpreter implements ActivityContextAware {
             return;
         }
 
+        try {
+            performActivity(transletName);
+        } catch (ActivityException e) {
+            log.error("Failed to execute translet: " + transletName, e);
+        }
+    }
+
+    private void performActivity(String transletName) throws ActivityException {
         String transletFullName = COMMAND_PREFIX + transletName;
         TransletRule transletRule = context.getTransletRuleRegistry().getTransletRule(transletFullName);
         if (transletRule == null) {
             throw new TransletNotFoundException(transletName);
         }
 
-        performActivity(transletFullName, transletRule);
+//        try (Activity activity = context.getCurrentActivity().newActivity()){
+//            activity.prepare(transletName, transletRule);
+//            activity.perform();
+//        }
     }
 
-    private void performActivity(String transletName, TransletRule transletRule) {
-        Activity activity = context.getCurrentActivity().newActivity();
-        activity.prepare(transletName, transletRule);
-        activity.perform();
-    }
 
     private Map<String, String> toMap(TransletRule transletRule) {
         Map<String, String> map = new LinkedHashMap<>();
