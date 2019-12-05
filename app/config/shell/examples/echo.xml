@@ -8,7 +8,7 @@
         and attributes directly to the console.
     </description>
 
-    <translet name="echo">
+    <translet name="echo1">
         <description style="apon">
             |
             |   It accepts parameters and print them to the console.

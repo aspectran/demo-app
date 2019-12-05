@@ -9,7 +9,6 @@ context: {
     profiles: {
         active: [
             h2
-            jetty
         ]
     }
     autoReload: {
@@ -59,6 +58,9 @@ shell: {
         com.aspectran.shell.command.builtins.RestartCommand
         com.aspectran.shell.command.builtins.QuitCommand
     ]
+    session: {
+        startup: true
+    }
     workingDir: /work
     verbose: true
     exposals: {
@@ -81,6 +83,9 @@ daemon: {
         com.aspectran.daemon.command.builtins.RestartCommand
         com.aspectran.daemon.command.builtins.QuitCommand
     ]
+    session: {
+        startup: true
+    }
     exposals: {
         -: /**
     }

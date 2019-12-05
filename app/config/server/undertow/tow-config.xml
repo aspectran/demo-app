@@ -126,13 +126,20 @@
                 <bean class="com.aspectran.undertow.server.servlet.TowJasperInitializer">
                     <properties>
                         <item name="jarsToScan" type="array">
+                            <value>/WEB-INF/lib/taglibs-standard-spec-1.2.5.jar</value>
                             <value>/WEB-INF/lib/taglibs-standard-impl-1.2.5.jar</value>
-                            <value>/WEB-INF/lib/taglibs-standard-jstlel-1.2.5.jar</value>
                         </item>
                     </properties>
                 </bean>
             </item>
-            <item name="webSocketEnabled" valueType="boolean">true</item>
+            <item name="webSocketInitializer">
+                <bean class="com.aspectran.undertow.server.servlet.TowWebSocketInitializer">
+                    <properties>
+                        <item name="directBuffers" valueType="boolean">false</item>
+                        <item name="bufferSize" valueType="int">1024</item>
+                    </properties>
+                </bean>
+            </item>
             <item name="derived" valueType="boolean">true</item>
         </properties>
     </bean>

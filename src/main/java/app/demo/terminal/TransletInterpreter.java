@@ -49,10 +49,10 @@ import java.util.Map;
 import java.util.Set;
 
 @Component("/terminal")
-@Bean ("transletInterpreter")
+@Bean("transletInterpreter")
 public class TransletInterpreter implements ActivityContextAware {
 
-    private static final Log log = LogFactory.getLog(TransletInterpreter.class);
+    private final Log log = LogFactory.getLog(TransletInterpreter.class);
 
     private static final String COMMAND_PREFIX = "/terminal/";
 
@@ -71,11 +71,10 @@ public class TransletInterpreter implements ActivityContextAware {
             return;
         }
 
-        String transletFullName = COMMAND_PREFIX + transletName;
-        TransletRule transletRule = context.getTransletRuleRegistry().getTransletRule(transletFullName);
+        TransletRule transletRule = context.getTransletRuleRegistry().getTransletRule(transletName);
         if (transletRule == null) {
             if (log.isDebugEnabled()) {
-                log.debug("Translet not found: " + transletFullName);
+                log.debug("Translet not found: " + transletName);
             }
 
             JsonWriter jsonWriter = new JsonWriter(translet.getResponseAdapter().getWriter());
@@ -143,8 +142,7 @@ public class TransletInterpreter implements ActivityContextAware {
     }
 
     private void performActivity(String transletName) throws ActivityException {
-        String transletFullName = COMMAND_PREFIX + transletName;
-        TransletRule transletRule = context.getTransletRuleRegistry().getTransletRule(transletFullName);
+        TransletRule transletRule = context.getTransletRuleRegistry().getTransletRule(transletName);
         if (transletRule == null) {
             throw new TransletNotFoundException(transletName, MethodType.GET);
         }

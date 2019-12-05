@@ -51,5 +51,6 @@
     <append file="/config/web/examples/gs-rest-service.xml"/>
     <append file="/config/web/examples/file-upload.xml"/>
     <append file="/config/web/terminal/translet-interpreter.xml"/>
+    <append file="/config/skylark/skylark.xml"/>
 
 </aspectran>

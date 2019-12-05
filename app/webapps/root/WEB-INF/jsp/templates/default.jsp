@@ -82,6 +82,9 @@
                     <li>
                         <a href="/terminal/">Terminal</a>
                     </li>
+                    <li>
+                        <a href="/skylark/">Skylark</a>
+                    </li>
                 </ul>
             </div>
             <div class="top-bar-right">
@@ -155,13 +158,9 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="large-12 columns">
-            <c:if test="${not empty page.include}">
-                <jsp:include page="/WEB-INF/jsp/${page.include}.jsp"/>
-            </c:if>
-        </div>
-    </div>
+    <c:if test="${not empty page.include}">
+        <jsp:include page="/WEB-INF/jsp/${page.include}.jsp"/>
+    </c:if>
 </section>
 <div id="up-to-top" class="row">
     <div class="small-12 columns" style="text-align: right;">
@@ -172,46 +171,28 @@
     <div id="footer">
         <div class="row">
             <div class="medium-2 large-1 columns hide-for-small-only t5">
-                <h5><a class="logo" href="https://aspectran.com/info/" title="Aspectran"><img src="https://aspectran.com/assets/img/aspectran-logo-grey-x100.png" width="100" height="100" title="Aspectran"/></a></h5>
+                <h5><a class="logo" href="https://aspectran.com/info/" title="Aspectran"><img src="https://aspectran.com/assets/img/aspectran-logo-grey-x100.png" width="100" height="100" alt="Aspectran" title="Aspectran"/></a></h5>
             </div>
             <div class="medium-4 large-4 columns">
                 <a href="https://aspectran.com/info/"><h5>About Aspectran</h5></a>
-                <p>
-                    <a href="https://aspectran.com/info/">Aspectran is a Java framework for building Web and command-line applications.</a>
-                </p>
+                <p><a href="https://aspectran.com/info/">Aspectran is a Java framework for building Web and command-line applications.</a></p>
             </div>
             <div class="small-6 medium-3 large-3 large-offset-1 columns">
                 <h5>Navigation</h5>
                 <ul class="no-bullet">
-                    <li class="">
-                        <a href="https://aspectran.com/getting-started/" title="">Getting-Started</a>
-                    </li>
-                    <li class="">
-                        <a href="https://aspectran.com/docs/" title="">Documentation</a>
-                    </li>
-                    <li class="" >
-                        <a href="https://aspectran.com/guides/" title="">Guides</a>
-                    </li>
-                    <li class="" >
-                        <a href="https://aspectran.com/projects/" title="">Projects</a>
-                    </li>
+                    <li><a href="https://aspectran.com/getting-started/" title="">Getting-Started</a></li>
+                    <li><a href="https://aspectran.com/docs/" title="">Documentation</a></li>
+                    <li><a href="https://aspectran.com/guides/" title="">Guides</a></li>
+                    <li><a href="https://aspectran.com/projects/" title="">Projects</a></li>
                 </ul>
             </div>
             <div class="small-6 medium-3 large-3 columns">
                 <h5>Services</h5>
                 <ul class="no-bullet">
-                    <li>
-                        <a href="https://aspectran.com/support/" title="Aspectran Support">Support</a>
-                    </li>
-                    <li>
-                        <a href="https://aspectran.com/feed.xml" title="Subscribe to RSS Feed">RSS</a>
-                    </li>
-                    <li>
-                        <a href="https://aspectran.com/atom.xml" title="Subscribe to Atom Feed">Atom</a>
-                    </li>
-                    <li>
-                        <a href="https://aspectran.com/sitemap.xml"  title="Sitemap for Google Webmaster Tools">sitemap.xml</a>
-                    </li>
+                    <li><a href="https://aspectran.com/support/" title="Aspectran Support">Support</a></li>
+                    <li><a href="https://aspectran.com/feed.xml" title="Subscribe to RSS Feed">RSS</a></li>
+                    <li><a href="https://aspectran.com/atom.xml" title="Subscribe to Atom Feed">Atom</a></li>
+                    <li><a href="https://aspectran.com/sitemap.xml"  title="Sitemap for Google Webmaster Tools">sitemap.xml</a></li>
                 </ul>
             </div>
         </div>
@@ -319,10 +300,9 @@
         $(".lazy-sticky").each(function() {
             var $win = $(window);
             var $this = $(this);
-            var topNavHeight = 60;
             var upToTopHeight = $("#up-to-top").height() + 30 + 60;
             var footerHeight = $("#footer-content").height() + upToTopHeight;
-            var baseOffsetTop = $this.offset().top - topNavHeight;
+            var baseOffsetTop = $this.offset().top;
             var offsetTop = 0;
             var thisHeight = $this.height();
             var winHeight = $win.height();
@@ -336,9 +316,9 @@
                         var offset = $("#" + anchor).offset();
                         if(offset) {
                             immediate = true;
-                            $win.scrollTop(offset.top - topNavHeight);
+                            $win.scrollTop(offset.top - $("#navigation.fixed .top-bar").height()||0);
                         }
-                    }, 100);
+                    }, 300);
                 }
             });
             $win.scroll(function() {
@@ -360,7 +340,9 @@
                         immediate = false;
                     }, immediate ? 250 : 500);
                 } else {
-                    if(immediate || (scrollTop > baseOffsetTop + offsetTop + thisHeight - 20) || (scrollTop < baseOffsetTop + offsetTop)) {
+                    var topBarHeight = $("#navigation.fixed .top-bar").height()||0;
+                    if(immediate || (scrollTop > baseOffsetTop + topBarHeight + offsetTop + thisHeight - 20) ||
+                        (scrollTop < baseOffsetTop + topBarHeight + offsetTop)) {
                         var tocOffsetLeftBase = $this.offset().left;
                         if(tocOffsetLeftBase > 100) {
                             if(scrollTimer) {
@@ -368,14 +350,15 @@
                                 scrollTimer = null;
                             }
                             scrollTimer = setInterval(function() {
+                                topBarHeight = $("#navigation.fixed .top-bar").height()||0;
                                 scrollTop = $win.scrollTop();
-                                if(scrollTop < baseOffsetTop) {
+                                if(scrollTop < baseOffsetTop + topBarHeight) {
                                     scrollTop = 0;
                                 } else {
-                                    scrollTop = scrollTop - baseOffsetTop + 10;
+                                    scrollTop = scrollTop - baseOffsetTop + topBarHeight + 10;
                                 }
-                                if(scrollTop > $(document).height() - footerHeight - thisHeight - baseOffsetTop - topNavHeight) {
-                                    scrollTop = $(document).height() - footerHeight - thisHeight - baseOffsetTop - topNavHeight;
+                                if(scrollTop > $(document).height() - footerHeight - thisHeight - baseOffsetTop + topBarHeight) {
+                                    scrollTop = $(document).height() - footerHeight - thisHeight - baseOffsetTop + topBarHeight;
                                 }
                                 offsetTop = scrollTop;
                                 $this.css({
