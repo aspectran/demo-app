@@ -52,5 +52,7 @@
     <append file="/config/web/examples/file-upload.xml"/>
     <append file="/config/web/terminal/translet-interpreter.xml"/>
     <append file="/config/skylark/skylark.xml"/>
+    <append file="/config/web/chat/chat.xml"/>
+    <append file="/config/web/apm/apm.xml"/>
 
 </aspectran>

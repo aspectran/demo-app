@@ -85,6 +85,12 @@
                     <li>
                         <a href="/skylark/">Skylark</a>
                     </li>
+                    <li>
+                        <a href="/chat/">Chat</a>
+                    </li>
+                    <li>
+                        <a href="/apm/">APM</a>
+                    </li>
                 </ul>
             </div>
             <div class="top-bar-right">
