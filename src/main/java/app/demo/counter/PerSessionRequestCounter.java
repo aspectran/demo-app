@@ -17,6 +17,7 @@ package app.demo.counter;
 
 import com.aspectran.core.component.bean.annotation.After;
 import com.aspectran.core.component.bean.annotation.Aspect;
+import com.aspectran.core.component.bean.annotation.AvoidAdvice;
 import com.aspectran.core.component.bean.annotation.Bean;
 import com.aspectran.core.component.bean.annotation.Before;
 import com.aspectran.core.component.bean.annotation.Component;
@@ -34,6 +35,7 @@ import java.util.concurrent.atomic.AtomicLong;
 @Bean
 @Scope(ScopeType.SESSION)
 @Aspect("perSessionRequestCounter")
+@AvoidAdvice
 public class PerSessionRequestCounter implements Serializable {
 
     private static final Log log = LogFactory.getLog(PerSessionRequestCounter.class);
