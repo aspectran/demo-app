@@ -11,9 +11,9 @@
     <logger name="org.quartz" level="info" additivity="false">
         <appender-ref ref="STDOUT"/>
     </logger>
-    <logger name="org.eclipse.jetty" level="error" additivity="false">
+    <Logger name="app.demo" level="debug" additivity="false">
         <appender-ref ref="STDOUT"/>
-    </logger>
+    </Logger>
     <root level="info">
         <appender-ref ref="STDOUT"/>
     </root>
