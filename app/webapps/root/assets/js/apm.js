@@ -1,16 +1,10 @@
-class SessionStats {
-    endpoint;
-    refreshInterval;
-    socket;
-    heartbeatTimer;
-    scrollTimer;
+function SessionStats(endpoint, refreshInterval) {
+    this.endpoint = endpoint;
+    this.refreshInterval = refreshInterval;
+    this.socket = null;
+    this.heartbeatTimer = null;
 
-    constructor(endpoint, refreshInterval) {
-        this.endpoint = endpoint;
-        this.refreshInterval = refreshInterval;
-    }
-
-    openSocket() {
+    this.openSocket = function() {
         if (this.socket) {
             this.socket.close();
         }
@@ -41,16 +35,16 @@ class SessionStats {
                 self.openSocket();
             }, 60000);
         };
-    }
+    };
 
-    closeSocket() {
+    this.closeSocket = function() {
         if (this.socket) {
             this.socket.close();
             this.socket = null;
         }
-    }
+    };
 
-    heartbeatPing() {
+    this.heartbeatPing = function() {
         if (this.heartbeatTimer) {
             clearTimeout(this.heartbeatTimer);
         }
@@ -62,9 +56,9 @@ class SessionStats {
                 self.heartbeatPing();
             }
         }, 59000);
-    }
+    };
 
-    printStats(stats) {
+    this.printStats = function(stats) {
         $(".activeSessionCount").text(stats.activeSessionCount);
         $(".highestSessionCount").text(stats.highestSessionCount);
         $(".createdSessionCount").text(stats.createdSessionCount);
@@ -83,26 +77,21 @@ class SessionStats {
                 $(".users").append(li);
             });
         }
-    }
+    };
 }
 
-class LogTailer {
-    endpoint;
-    tailers;
-    socket;
-    heartbeatTimer;
-    scrollTimer;
+function LogTailer(endpoint, tailers) {
+    this.endpoint = endpoint;
+    this.tailers = tailers;
+    this.socket = null;
+    this.heartbeatTimer = null;
+    this.scrollTimer = null;
 
-    pattern1 = /^Session ([\w\.]+) complete, active requests=(\d+)/i;
-    pattern2 = /^Session ([\w\.]+) deleted in session data store/i;
-    pattern3 = /^Session ([\w\.]+) accessed, stopping timer, active requests=(\d+)/i;
+    this.pattern1 = /^Session ([\w\.]+) complete, active requests=(\d+)/i;
+    this.pattern2 = /^Session ([\w\.]+) deleted in session data store/i;
+    this.pattern3 = /^Session ([\w\.]+) accessed, stopping timer, active requests=(\d+)/i;
 
-    constructor(endpoint, tailers) {
-        this.endpoint = endpoint;
-        this.tailers = tailers;
-    }
-
-    openSocket() {
+    this.openSocket = function() {
         if (this.socket) {
             this.socket.close();
         }
@@ -139,16 +128,16 @@ class LogTailer {
                 self.openSocket();
             }, 60000);
         };
-    }
+    };
 
-    closeSocket() {
+    this.closeSocket = function() {
         if (this.socket) {
             this.socket.close();
             this.socket = null;
         }
-    }
+    };
 
-    heartbeatPing() {
+    this.heartbeatPing = function() {
         if (this.heartbeatTimer) {
             clearTimeout(this.heartbeatTimer);
         }
@@ -160,9 +149,9 @@ class LogTailer {
                 self.heartbeatPing();
             }
         }, 59000);
-    }
+    };
 
-    printMessage(tailer, text) {
+    this.printMessage = function(tailer, text) {
         let self = this;
         setTimeout(function () {
             self.launchMissile(text);
@@ -171,21 +160,21 @@ class LogTailer {
         let logtail = $("#" + tailer);
         logtail.append(line);
         this.scrollToBottom(logtail);
-    }
+    };
 
-    printEventMessage(text, tailer) {
+    this.printEventMessage = function(text, tailer) {
         let logtail = (tailer ? $("#" + tailer) : $(".log-tail"));
         $("<p/>").addClass("event").html(text).appendTo(logtail);
         this.scrollToBottom(logtail);
-    }
+    };
 
-    printErrorMessage(text, tailer) {
+    this.printErrorMessage = function(text, tailer) {
         let logtail = (tailer ? $("#" + tailer) : $(".log-tail"));
         $("<p/>").addClass("event error").html(text).appendTo(logtail);
         this.scrollToBottom(logtail);
-    }
+    };
 
-    switchTailBite(logtail, status) {
+    this.switchTailBite = function(logtail, status) {
         if (!logtail) {
             logtail = $(".log-tail");
         }
@@ -200,9 +189,9 @@ class LogTailer {
             logtail.closest(".log-container").find(".tail-status").removeClass("active");
             logtail.data("bite", false);
         }
-    }
+    };
 
-    scrollToBottom(logtail) {
+    this.scrollToBottom = function(logtail) {
         if (logtail.data("bite")) {
             if (this.scrollTimer) {
                 clearTimeout(this.scrollTimer);
@@ -214,9 +203,9 @@ class LogTailer {
                 }
             }, 300);
         }
-    }
+    };
 
-    launchMissile(line) {
+    this.launchMissile = function(line) {
         let sessionId = "";
         let requests = 0;
         let idx = line.indexOf("Session");
@@ -256,9 +245,9 @@ class LogTailer {
             mis.css("top", this.generateRandom(3, 90 - (requests * 2)) + "%");
             mis.appendTo($(".missile-route")).addClass("missile mis-" + requests);
         }
-    }
+    };
 
-    generateRandom(min, max) {
+    this.generateRandom = function(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
+    };
 }
