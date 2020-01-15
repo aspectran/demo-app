@@ -145,6 +145,8 @@
     }
 </script>
 <script>
+    'use strict';
+
     $(function() {
         let logTailer = new LogTailer("/apm/logtail", "app-log");
         $(".bite-tail").click(function() {
