@@ -48,7 +48,9 @@ public class SimpleFileUploadAction {
     private void addUploadedFile(UploadedFile uploadedFile) {
         synchronized (uploadedFiles) {
             uploadedFiles.put(uploadedFile.getKey(), uploadedFile);
-            log.debug("Uploaded File " + uploadedFile);
+            if (log.isDebugEnabled()) {
+                log.debug("Uploaded File " + uploadedFile);
+            }
 
             if (uploadedFiles.size() > this.maxFiles) {
                 Iterator<String> it = uploadedFiles.keySet().iterator();
@@ -56,7 +58,9 @@ public class SimpleFileUploadAction {
                 while (cnt-- > 0) {
                     if (it.hasNext()) {
                         UploadedFile removedFile = uploadedFiles.remove(it.next());
-                        log.debug("Remove Old File " + removedFile);
+                        if (log.isDebugEnabled()) {
+                            log.debug("Remove Old File " + removedFile);
+                        }
                     }
                 }
             }
@@ -72,7 +76,7 @@ public class SimpleFileUploadAction {
     @RequestToPost("/files")
     @Transform(TransformType.JSON)
     @Action(id = "files")
-    public Collection upload(Translet translet) throws IOException {
+    public Collection<?> upload(Translet translet) throws IOException {
         FileParameter fileParameter = translet.getFileParameter("file");
         if (fileParameter != null) {
             String key = UUID.randomUUID().toString();
@@ -124,7 +128,7 @@ public class SimpleFileUploadAction {
     @RequestToGet("/files")
     @Transform(TransformType.JSON)
     @Action(id = "files")
-    public Collection list() {
+    public Collection<?> list() {
         return uploadedFiles.values();
     }
 
