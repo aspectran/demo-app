@@ -47,7 +47,10 @@
     </div>
 </div>
 <script>
+    'use strict';
+
     $(function() {
+        'use strict';
         let sessionStats = new SessionStats("/apm/stats", 5);
         try {
             sessionStats.openSocket();
@@ -145,9 +148,8 @@
     }
 </script>
 <script>
-    'use strict';
-
     $(function() {
+        'use strict';
         let logTailer = new LogTailer("/apm/logtail", "app-log");
         $(".bite-tail").click(function() {
             let logtail = $(this).closest(".log-container").find(".log-tail");
