@@ -63,7 +63,7 @@
         </div>
     </div>
     <div class="top-bar" id="gnb-menu" style="display:none">
-        <div class="row">
+        <div class="row ${page.style}">
             <div class="top-bar-logo">
                 <div class="circle">
                     <a class="logo" href="/" title="Aspectran"><img src="https://aspectran.com/assets/img/aspectran-site-logo.png" alt="Aspectran"/></a>
@@ -134,7 +134,7 @@
 </nav>
 <section itemscope itemtype="http://schema.org/Article">
     <div id="masthead">
-        <div class="row">
+        <div class="row ${page.style}">
             <div class="small-12 columns">
                 <header>
                     <p class="subheadline" itemprop="alternativeHeadline">${page.subheadline}</p>
@@ -168,7 +168,7 @@
         <jsp:include page="/WEB-INF/jsp/${page.include}.jsp"/>
     </c:if>
 </section>
-<div id="up-to-top" class="row">
+<div id="up-to-top" class="row ${page.style}">
     <div class="small-12 columns" style="text-align: right;">
         <a class="iconfont" href="#top-of-page">&#xf108;</a>
     </div><!-- /.small-12.columns -->
