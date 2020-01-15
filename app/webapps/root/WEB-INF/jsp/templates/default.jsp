@@ -153,7 +153,7 @@
                 </div>
             </div>
         </div>
-        <div class="row breadcrumbs-bar">
+        <div class="row breadcrumbs-bar ${page.style}">
             <div class="columns">
                 <nav role="navigation" aria-label="You are here:">
                     <ul class="breadcrumbs" itemprop="breadcrumb">

@@ -19,12 +19,13 @@ function SessionStats(endpoint, refreshInterval) {
         };
         this.socket.onmessage = function (event) {
             if (typeof event.data === "string") {
-                if (event.data !== "--heartbeat-pong--") {
-                    let stats = JSON.parse(event.data);
-                    self.printStats(stats);
+                if (event.data === "--heartbeat-pong--") {
+                    self.heartbeatPing();
+                    return;
                 }
+                let stats = JSON.parse(event.data);
+                self.printStats(stats);
             }
-            self.heartbeatPing();
         };
         this.socket.onclose = function (event) {
             self.closeSocket();
@@ -55,7 +56,7 @@ function SessionStats(endpoint, refreshInterval) {
                 self.heartbeatTimer = null;
                 self.heartbeatPing();
             }
-        }, 59000);
+        }, 57000);
     };
 
     this.printStats = function(stats) {
@@ -108,13 +109,16 @@ function LogTailer(endpoint, tailers) {
         };
         this.socket.onmessage = function (event) {
             if (typeof event.data === "string") {
+                if (event.data === "--heartbeat-pong--") {
+                    self.heartbeatPing();
+                    return;
+                }
                 let msg = event.data;
                 let idx = msg.indexOf(":");
                 if (idx !== -1) {
                     self.printMessage(msg.substring(0, idx), msg.substring(idx + 1));
                 }
             }
-            self.heartbeatPing();
         };
         this.socket.onclose = function (event) {
             self.printEventMessage('Socket connection closed. Please refresh this page to try again!');
@@ -148,7 +152,7 @@ function LogTailer(endpoint, tailers) {
                 self.heartbeatTimer = null;
                 self.heartbeatPing();
             }
-        }, 59000);
+        }, 57000);
     };
 
     this.printMessage = function(tailer, text) {
