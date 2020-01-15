@@ -11,9 +11,9 @@
     <logger name="org.quartz" level="info" additivity="false">
         <appender-ref ref="STDOUT"/>
     </logger>
-    <Logger name="app.demo" level="debug" additivity="false">
+    <logger name="app.demo" level="debug" additivity="false">
         <appender-ref ref="STDOUT"/>
-    </Logger>
+    </logger>
     <root level="info">
         <appender-ref ref="STDOUT"/>
     </root>
