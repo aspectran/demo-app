@@ -239,11 +239,9 @@ function LogTailer(endpoint, tailers) {
             }
             return;
         }
-        console.log("line: " + line);
         if (this.pattern3.test(line) || this.pattern4.test(line)) {
             sessionId = RegExp.$1;
             requests = RegExp.$2||1;
-            console.log("requests: " + requests);
             if (requests > 3) {
                 requests = 3;
             }
