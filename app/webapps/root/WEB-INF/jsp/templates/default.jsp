@@ -49,7 +49,7 @@
         ga('send', 'pageview');
     </script>
 </head>
-<body id="top-of-page" class="article" itemscope itemtype="http://schema.org/WebPage">
+<body id="top-of-page" class="${page.style}" itemscope itemtype="http://schema.org/WebPage">
 <nav id="navigation" class="no-js">
     <div class="title-bar" data-responsive-toggle="gnb-menu" data-hide-for="large" style="display:none">
         <div class="title-bar-left">

@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <div class="row">
-  <div class="t10 large-4 columns" style="position:relative;">
+  <div class="t20 large-4 columns" style="position:relative;">
     <h2 style="margin:0;">Customer List</h2>
     <span id="total" class="float-right warning badge" style="font-size:2em;position:absolute;top:0;right:0;">0</span>
     <div id="customer-list-board" style="clear:both;border-radius:3px;margin-bottom:.5em;">
@@ -15,7 +15,7 @@
       <button id="delete" type="button" class="button alert">Delete</button>
     </div>
   </div>
-  <div class="t10 large-8 columns" style="position:relative;">
+  <div class="t20 large-8 columns" style="position:relative;">
     <h2 style="margin:0;">Customer Details</h2>
     <span id="cust-no" class="float-right success badge" style="font-size:2em;position:absolute;top:0;right:0;">0</span>
     <div id="details" class="panel radius">
