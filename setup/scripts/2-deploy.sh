@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source app.conf
+source setup/app.conf
 
 [ ! -d "$DEPLOY_DIR" ] && mkdir "$DEPLOY_DIR"
 [ ! -d "$DEPLOY_DIR/bin" ] && mkdir "$DEPLOY_DIR"/bin
