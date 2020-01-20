@@ -11,3 +11,5 @@ fi
 
 cp "$REPO_DIR"/setup/scripts/*.sh "$BASE_DIR"
 chmod +x "$BASE_DIR"/*.sh
+
+echo "Your application installation is complete."

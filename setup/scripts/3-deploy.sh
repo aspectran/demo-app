@@ -2,6 +2,8 @@
 
 source setup/app.conf
 
+echo "Deploying to '$DEPLOY_DIR'..."
+
 [ ! -d "$DEPLOY_DIR" ] && mkdir "$DEPLOY_DIR"
 [ ! -d "$DEPLOY_DIR/bin" ] && mkdir "$DEPLOY_DIR"/bin
 [ ! -d "$DEPLOY_DIR/config" ] && mkdir "$DEPLOY_DIR"/config
@@ -23,4 +25,4 @@ cp -pR "$REPO_DIR"/app/inbound/* "$DEPLOY_DIR"/inbound
 cp -pR "$REPO_DIR"/app/lib/* "$DEPLOY_DIR"/lib
 cp -pR "$REPO_DIR"/app/webapps/* "$DEPLOY_DIR"/webapps
 
-echo "Done."
+echo "Deployment complete!"
