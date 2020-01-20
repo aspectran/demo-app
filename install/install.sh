@@ -9,5 +9,6 @@ if [ ! -d "$BUILD_DIR" ]; then
   cd "$REPO_DIR" || exit
 fi
 
-cp "$REPO_DIR"/*.sh "$BASE_DIR"
-chown +x "$BASE_DIR"/*.sh
+cp "$REPO_DIR"/install/app.conf "$BASE_DIR"
+cp "$REPO_DIR"/install/scripts/*.sh "$BASE_DIR"
+chmod +x "$BASE_DIR"/*.sh
