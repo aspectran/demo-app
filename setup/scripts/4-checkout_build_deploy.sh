@@ -1,5 +1,5 @@
 #!/bin/bash
 
-./0-checkout.sh
-./1-build.sh
-./2-deploy.sh
+./1-checkout.sh
+./2-build.sh
+./3-deploy.sh
