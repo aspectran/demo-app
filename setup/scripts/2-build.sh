@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source setup/app.conf
+source app.conf
 
 cd "$REPO_DIR" || exit
 mvn clean package $1

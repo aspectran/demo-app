@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source setup/app.conf
+source app.conf
 
 echo "Deploying to '$DEPLOY_DIR'..."
 

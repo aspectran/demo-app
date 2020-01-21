@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 ### BEGIN INIT INFO
 # Provides:          demo-app
@@ -10,7 +10,7 @@
 # Description:       Start/stop Aspectran daemons
 ### END INIT INFO
 
-source /home/aspectran/demo-app/setup/app.conf
+. /home/aspectran/demo-app/app.conf
 
 "$DEPLOY_DIR/bin/jsvc-daemon.sh" --proc-name "$PROC_NAME" --pid-file "$PID_FILE" --user "$DAEMON_USER" $1
 

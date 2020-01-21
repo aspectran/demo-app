@@ -1,3 +1,5 @@
 #!/bin/bash
 
-tail -f ./app/logs/app.log
+source app.conf
+
+tail -f "$DEPLOY_DIR/logs/app.log"

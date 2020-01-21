@@ -1,3 +1,5 @@
 #!/bin/bash
 
-tail -f ./app/logs/undertow-access.log
+source app.conf
+
+tail -f "$DEPLOY_DIR/logs/undertow-access.log"
