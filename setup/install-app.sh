@@ -13,6 +13,7 @@ fi
 
 [ ! -f "$BASE_DIR"/app.conf ] && cp app.conf "$BASE_DIR"
 cp "$REPO_DIR"/setup/scripts/*.sh "$BASE_DIR"
+cp "$REPO_DIR/setup/install-service.sh" "$BASE_DIR/setup"
 chmod +x "$BASE_DIR"/*.sh
 
 echo "Your application installation is complete."
