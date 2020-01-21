@@ -11,9 +11,9 @@ if [ ! -d "$BUILD_DIR" ]; then
   cd "$REPO_DIR" || exit
 fi
 
-[ ! -f "$BASE_DIR/app.conf" ] && cp "$REPO_DIR/setup/app.conf" "$BASE_DIR"
-cp "$REPO_DIR"/setup/scripts/*.sh "$BASE_DIR"
-[ ! -f "$BASE_DIR/setup/install-service.sh" ] && cp "$REPO_DIR/setup/install-service.sh" "$BASE_DIR/setup"
+cp "$REPO_DIR/setup/app.conf" "$BASE_DIR" || exit
+cp "$REPO_DIR"/setup/scripts/*.sh "$BASE_DIR" || exit
+cp "$REPO_DIR/setup/install-service.sh" "$BASE_DIR/setup" || exit
 chmod +x "$BASE_DIR"/*.sh
 
 echo "Your application installation is complete."
