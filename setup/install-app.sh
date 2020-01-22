@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/bin/sh
 
-source app.conf
+. ./app.conf
 
 echo "Installing application to $BASE_DIR ..."
 

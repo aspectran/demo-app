@@ -1,6 +1,6 @@
 #!/bin/sh
 
-. app.conf
+. ./app.conf
 
 [ ! -d "$BUILD_DIR" ] && mkdir "$BUILD_DIR"
 

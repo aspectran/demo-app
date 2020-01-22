@@ -1,5 +1,5 @@
 #!/bin/sh
 
-. app.conf
+. ./app.conf
 
 "$DEPLOY_DIR/bin/shell.sh" --debug

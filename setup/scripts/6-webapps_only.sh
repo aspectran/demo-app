@@ -1,6 +1,6 @@
 #!/bin/sh
 
-. app.conf
+. ./app.conf
 
 cd "$REPO_DIR" || exit
 git pull origin master

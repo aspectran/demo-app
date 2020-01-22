@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/bin/sh
 
-source app.conf
+. ./app.conf
 
 echo "Uninstalling /etc/init.d/$APP_NAME ..."
 

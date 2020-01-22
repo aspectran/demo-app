@@ -1,6 +1,6 @@
 #!/bin/sh
 
-. app.conf
+. ./app.conf
 
 echo "Deploying to $DEPLOY_DIR ..."
 
