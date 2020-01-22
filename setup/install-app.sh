@@ -13,8 +13,10 @@ fi
 
 cp "$REPO_DIR/setup/app.conf" "$BASE_DIR" || exit
 cp "$REPO_DIR"/setup/scripts/*.sh "$BASE_DIR" || exit
-cp "$REPO_DIR/setup/install-service.sh" "$BASE_DIR/setup" || exit
 chmod +x "$BASE_DIR"/*.sh
+cp "$REPO_DIR/setup/install-service.sh" "$BASE_DIR/setup" || exit
+cp "$REPO_DIR/setup/uninstall-service.sh" "$BASE_DIR/setup" || exit
+chmod +x "$BASE_DIR"/setup/*.sh
 
 echo "Your application installation is complete."
 
