@@ -77,6 +77,7 @@
                             <li><a href="/examples/hello-world">Hello World</a></li>
                             <li><a href="/examples/gs-rest-service/">RESTful Web Service</a></li>
                             <li><a href="/examples/file-upload/">File Upload</a></li>
+                            <li><a href="https://jpetstore.aspectran.com">JPetStore Demo</a></li>
                         </ul>
                     </li>
                     <li>
