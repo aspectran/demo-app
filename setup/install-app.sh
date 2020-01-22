@@ -19,6 +19,6 @@ cp "$REPO_DIR/setup/uninstall-service.sh" "$BASE_DIR/setup" || exit
 chmod +x "$BASE_DIR"/setup/*.sh
 
 echo "Your application installation is complete."
-
+echo ""
 echo "To run this application as a service, run the following script:"
 echo "  $BASE_DIR/setup/install-service.sh"
