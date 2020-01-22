@@ -6,7 +6,7 @@ source app.conf
 
 if [ ! -d "$REPO_DIR" ]; then
   cd "$BUILD_DIR" || exit
-  git clone "$REPO"
+  git clone "$REPO" "$APP_NAME"
   cd "$REPO_DIR" || exit
 else
   cd "$REPO_DIR" || exit
