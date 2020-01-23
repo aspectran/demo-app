@@ -1,17 +1,14 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<div class="row content">
-    <div class="columns t10 b10">
+<div class="grid-x grid-padding-x">
+    <div class="cell content">
         <div id="skylark-term"></div>
     </div>
 </div>
 <style>
-    body.plate .row.content {
-        padding: 0;
+    body.plate .cell.content {
+        padding: 10px;
         background-color: #000;
-    }
-    #skylark-term {
-        padding: 0;
     }
     .terminal-wrapper textarea {
         box-shadow: none;

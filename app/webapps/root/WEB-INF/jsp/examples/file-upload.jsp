@@ -68,8 +68,8 @@
     margin: 0;
   }
 </style>
-<div class="row content">
-  <div class="columns large-12">
+<div class="grid-x grid-padding-x">
+  <div class="content cell large-12">
     <div class="t30 b20">
     <form id="fileupload" action="https://jquery-file-upload.appspot.com/" method="POST" enctype="multipart/form-data">
       <label for="fileAdds" class="button fileinput-button">Add files...</label>
