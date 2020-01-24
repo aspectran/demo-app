@@ -163,7 +163,7 @@
     <div id="up-to-top" class="grid-x">
         <div class="small-12 cell" style="text-align: right;">
             <a class="iconfont" href="#top-of-page">&#xf108;</a>
-        </div><
+        </div>
     </div>
 </div>
 <footer id="footer-content">
