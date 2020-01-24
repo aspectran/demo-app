@@ -8,7 +8,7 @@
     <meta name="google" content="notranslate">
     <title>${empty page.title ? "Aspectran Demo Site" : page.title}</title>
     <meta name="description" content="${empty page.description ? "Welcome to Aspectran Demo" : page.description}" />
-    <link rel="stylesheet" type="text/css" href="https://aspectran.com/assets/css/styles_aspectran.css" />
+    <link rel="stylesheet" type="text/css" href="https://aspectran.com/assets/css/aspectran.css" />
     <link href="https://fonts.googleapis.com/css?family=Raleway:500,500i,700" rel="stylesheet">
     <script src="https://aspectran.com/assets/js/modernizr-custom.js"></script>
     <script src="https://aspectran.com/assets/js/jquery.js"></script>
@@ -163,10 +163,9 @@
     <div id="up-to-top" class="grid-x">
         <div class="small-12 cell" style="text-align: right;">
             <a class="iconfont" href="#top-of-page">&#xf108;</a>
-        </div><!-- /.small-12.cell -->
+        </div><
     </div>
 </div>
-</div><!-- /.row -->
 <footer id="footer-content">
     <div id="footer">
         <div class="grid-container">
