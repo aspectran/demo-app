@@ -58,7 +58,7 @@
         <div class="title-bar-center">
             <a href="#top-of-page">Aspectran</a>
         </div>
-        <div class="title-bar-right" data-toggle>
+        <div class="title-bar-right" data-toggle="gnb-menu">
             <a class="menu-icon" title="Menu"></a>
         </div>
     </div>
@@ -123,7 +123,7 @@
     <div id="masthead">
         <div class="grid-container ${page.style}">
             <div class="grid-x">
-                <div class="small-12 cell">
+                <div class="cell">
                     <header>
                         <p class="subheadline" itemprop="alternativeHeadline">${page.subheadline}</p>
                         <h1 itemprop="headline">${page.headline}</h1>
