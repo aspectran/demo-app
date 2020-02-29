@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 <head>
@@ -119,7 +120,7 @@
     </div>
 </nav>
 <section itemscope itemtype="http://schema.org/Article">
-    <div id="masthead">
+    <div id="masthead"<c:if test="${fn:contains(page.style, 'compact')}"> class="masthead-compact"</c:if>>
         <div class="grid-container ${page.style}">
             <div class="grid-x">
                 <div class="cell">
@@ -134,7 +135,6 @@
                         <div class="hexagon hex1"></div>
                         <div class="hexagon hex2"></div>
                         <div class="hexagon hex3"></div>
-                        <div class="hexagon hex4"></div>
                         <div class="hexagon hex5"></div>
                         <div class="hexagon hex6"></div>
                     </div>
