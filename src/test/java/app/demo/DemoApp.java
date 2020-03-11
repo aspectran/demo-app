@@ -24,7 +24,7 @@ import java.io.IOException;
 /**
  * Test for Demo App.
  */
-public class DemoAppTest {
+public class DemoApp {
 
     public static void main(String[] args) {
         try {
