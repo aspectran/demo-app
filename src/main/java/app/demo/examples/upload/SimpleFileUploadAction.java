@@ -12,7 +12,7 @@ import com.aspectran.core.context.rule.type.TransformType;
 import com.aspectran.core.util.FilenameUtils;
 import com.aspectran.core.util.StringUtils;
 import com.aspectran.core.util.logging.Log;
-import com.aspectran.core.util.logging.LogFactory;
+import com.aspectran.core.util.logging.LoggerFactory;
 import com.aspectran.web.support.http.HttpStatus;
 import com.aspectran.web.support.http.HttpStatusSetter;
 
@@ -31,7 +31,7 @@ import java.util.UUID;
 @Component("/examples/file-upload")
 public class SimpleFileUploadAction {
 
-    private static final Log log = LogFactory.getLog(SimpleFileUploadAction.class);
+    private static final Logger logger = LoggerFactory.getLogger(SimpleFileUploadAction.class);
 
     private final Map<String, UploadedFile> uploadedFiles = new LinkedHashMap<>();
 

@@ -20,7 +20,7 @@ import com.aspectran.core.component.bean.ablility.DisposableBean;
 import com.aspectran.core.component.bean.ablility.InitializableBean;
 import com.aspectran.core.util.ToStringBuilder;
 import com.aspectran.core.util.logging.Log;
-import com.aspectran.core.util.logging.LogFactory;
+import com.aspectran.core.util.logging.LoggerFactory;
 import com.sun.speech.freetts.Voice;
 import com.sun.speech.freetts.VoiceManager;
 
@@ -35,7 +35,7 @@ import java.util.Set;
  */
 public class TextToSpeechBean implements InitializableBean, DisposableBean {
 
-    private static final Log log = LogFactory.getLog(TextToSpeechBean.class);
+    private static final Logger logger = LoggerFactory.getLogger(TextToSpeechBean.class);
 
     private String voicePackage;
 

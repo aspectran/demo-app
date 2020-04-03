@@ -19,7 +19,7 @@ import com.aspectran.core.component.bean.annotation.AvoidAdvice;
 import com.aspectran.core.component.bean.annotation.Component;
 import com.aspectran.core.util.StringUtils;
 import com.aspectran.core.util.logging.Log;
-import com.aspectran.core.util.logging.LogFactory;
+import com.aspectran.core.util.logging.LoggerFactory;
 import com.aspectran.web.socket.jsr356.ActivityContextAwareEndpoint;
 import com.aspectran.web.socket.jsr356.AspectranConfigurator;
 
@@ -44,7 +44,7 @@ import java.util.Set;
 @AvoidAdvice
 public class LogtailEndpoint extends ActivityContextAwareEndpoint {
 
-    private static final Log log = LogFactory.getLog(LogtailEndpoint.class);
+    private static final Logger logger = LoggerFactory.getLogger(LogtailEndpoint.class);
 
     private static final String COMMAND_JOIN = "JOIN:";
 

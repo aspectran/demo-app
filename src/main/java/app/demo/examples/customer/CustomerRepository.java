@@ -18,7 +18,7 @@ package app.demo.examples.customer;
 import com.aspectran.core.component.bean.annotation.Bean;
 import com.aspectran.core.component.bean.annotation.Component;
 import com.aspectran.core.util.logging.Log;
-import com.aspectran.core.util.logging.LogFactory;
+import com.aspectran.core.util.logging.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +33,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Bean
 public class CustomerRepository {
 
-    private final Log log = LogFactory.getLog(CustomerRepository.class);
+    private final Logger logger = LoggerFactory.getLogger(CustomerRepository.class);
 
     private final Map<Integer, Customer> customerMap;
 
