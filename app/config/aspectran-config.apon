@@ -34,10 +34,10 @@ shell: {
         |{{YELLOW}}    /   |  ___  ____  ___  ___  / /____   ___  ____
         |{{GREEN }}   / /| | / __|/ __ |/ _ |/ __|/ __/ __|/ __ |/ __ |
         |{{GREEN }}  / ___ |(__  ) /_/ /  __/ /  / / / /  / /_/ / / / /
-        |{{CYAN  }} /_/  |_|____/ .___/|___/|___/|__/_/   |__(_(_/ /_/   Shell
-        |{{CYAN  }}=========== /_/ =============================================
+        |{{CYAN  }} /_/  |_|____/ .___/|___/|___/|__/_/   |__(_(_/ /_/   DEMO-APP
+        |{{CYAN  }}=========== /_/ ================================================
         |{{reset }}
-        |{{RED   }}Welcome To Aspectran Shell #{class:com.aspectran.core.util.Aspectran^version}
+        |{{RED   }}Welcome To Aspectran Demo App #{class:com.aspectran.core.util.Aspectran^version}
         |{{reset }}
         |If you want a list of all supported built-in commands, type '{{GREEN}}help{{reset}}'.
         |To get help on a specific command, type '{{GREEN}}command_name -h{{reset}}'.
@@ -79,7 +79,7 @@ daemon: {
         incoming: /commands/incoming
     }
     commands: [
-        com.aspectran.daemon.command.builtins.JettyCommand
+        com.aspectran.daemon.command.builtins.UndertowCommand
         com.aspectran.daemon.command.builtins.InvokeActionCommand
         com.aspectran.daemon.command.builtins.TransletCommand
         com.aspectran.daemon.command.builtins.ComponentCommand
