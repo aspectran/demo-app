@@ -25,8 +25,8 @@ import app.demo.chat.model.payload.BroadcastTextMessagePayload;
 import app.demo.chat.model.payload.DuplicatedUserPayload;
 import app.demo.chat.model.payload.SendTextMessagePayload;
 import app.demo.chat.model.payload.WelcomeUserPayload;
+import com.aspectran.core.activity.InstantActivitySupport;
 import com.aspectran.core.component.bean.annotation.Component;
-import com.aspectran.web.socket.jsr356.ActivityContextAwareEndpoint;
 import com.aspectran.web.socket.jsr356.AspectranConfigurator;
 
 import javax.websocket.CloseReason;
@@ -52,7 +52,7 @@ import java.util.concurrent.ConcurrentHashMap;
         decoders = ChatMessageDecoder.class,
         configurator = AspectranConfigurator.class
 )
-public class ChatServerEndpoint extends ActivityContextAwareEndpoint {
+public class ChatServerEndpoint extends InstantActivitySupport {
 
     private static final Map<String, Session> sessions = new ConcurrentHashMap<>();
 
@@ -68,7 +68,7 @@ public class ChatServerEndpoint extends ActivityContextAwareEndpoint {
             switch (payload.getType()) {
                 case CHAT:
                     if (username != null) {
-                        broadcastTextMessage(username, payload.getContent());
+                        broadcastTextMessage(session, username, payload.getContent());
                     }
                     break;
                 case JOIN:
@@ -135,7 +135,7 @@ public class ChatServerEndpoint extends ActivityContextAwareEndpoint {
     private void broadcastUserConnected(Session session, String username) {
         BroadcastConnectedUserPayload payload = new BroadcastConnectedUserPayload();
         payload.setUsername(username);
-        broadcast(session, new ChatMessage(payload));
+        broadcast(new ChatMessage(payload), session);
     }
 
     private void broadcastUserDisconnected(String username) {
@@ -144,11 +144,11 @@ public class ChatServerEndpoint extends ActivityContextAwareEndpoint {
         broadcast(new ChatMessage(payload));
     }
 
-    private void broadcastTextMessage(String username, String text) {
+    private void broadcastTextMessage(Session session, String username, String text) {
         BroadcastTextMessagePayload payload = new BroadcastTextMessagePayload();
         payload.setContent(text);
         payload.setUsername(username);
-        broadcast(new ChatMessage(payload));
+        broadcast(new ChatMessage(payload), session);
     }
 
     private void broadcastAvailableUsers() {
@@ -167,7 +167,7 @@ public class ChatServerEndpoint extends ActivityContextAwareEndpoint {
         }
     }
 
-    private void broadcast(Session ignoredSession, ChatMessage message) {
+    private void broadcast(ChatMessage message, Session ignoredSession) {
         synchronized (sessions) {
             for (Session session : sessions.values()) {
                 if (session.isOpen() && !session.getId().equals(ignoredSession.getId())) {
