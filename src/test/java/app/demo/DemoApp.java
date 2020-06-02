@@ -21,6 +21,8 @@ import com.aspectran.shell.jline.JLineAspectranShell;
 import java.io.File;
 import java.io.IOException;
 
+import static com.aspectran.core.context.config.AspectranConfig.BASE_PATH_PROPERTY_NAME;
+
 /**
  * Test for Demo App.
  */
@@ -30,7 +32,7 @@ public class DemoApp {
         try {
             File current = ResourceUtils.getResourceAsFile("");
             File root = new File(current, "../../app");
-            System.setProperty("aspectran.basePath", root.getCanonicalPath()); // for logback
+            System.setProperty(BASE_PATH_PROPERTY_NAME, root.getCanonicalPath()); // for logback
             JLineAspectranShell.main(new String[] { root.getCanonicalPath(), "config/aspectran-config.apon" });
         } catch (IOException e) {
             e.printStackTrace();
