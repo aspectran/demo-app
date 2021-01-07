@@ -29,9 +29,9 @@ import java.util.UUID;
  * <p>Created: 2018. 7. 9.</p>
  */
 @Component("/examples/file-upload")
-public class SimpleFileUploadAction {
+public class SimpleFileUploadActivity {
 
-    private static final Logger logger = LoggerFactory.getLogger(SimpleFileUploadAction.class);
+    private static final Logger logger = LoggerFactory.getLogger(SimpleFileUploadActivity.class);
 
     private final Map<String, UploadedFile> uploadedFiles = new LinkedHashMap<>();
 
@@ -109,7 +109,8 @@ public class SimpleFileUploadAction {
         UploadedFile uploadedFile = uploadedFiles.get(key);
         if (uploadedFile != null) {
             translet.getResponseAdapter().setContentType(uploadedFile.getFileType());
-            translet.getResponseAdapter().setHeader("Content-disposition", "attachment; filename=\"" + uploadedFile.getFileName() + "\"");
+            translet.getResponseAdapter().setHeader("Content-disposition",
+                    "attachment; filename=\"" + uploadedFile.getFileName() + "\"");
             translet.getResponseAdapter().getOutputStream().write(uploadedFile.getBytes());
         } else {
             HttpStatusSetter.setStatus(HttpStatus.NOT_FOUND, translet);
