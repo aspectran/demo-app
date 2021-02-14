@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE aspectran PUBLIC "-//ASPECTRAN//DTD Aspectran Configuration 6.0//EN"
-        "http://aspectran.github.io/dtd/aspectran-6.dtd">
+<!DOCTYPE aspectran PUBLIC "-//ASPECTRAN//DTD Aspectran Configuration 7.0//EN"
+        "http://aspectran.github.io/dtd/aspectran-7.dtd">
 <aspectran>
 
     <description>
@@ -68,7 +68,7 @@
                 <bean class="com.aspectran.undertow.server.servlet.TowJasperInitializer">
                     <properties>
                         <item name="tldResources" type="array">
-                            <value>/webroot/WEB-INF/lib/taglibs-standard-impl-1.2.5.jar</value>
+                            <value>/webroot/WEB-INF/lib/taglibs-standard-10.0.0-M10.jar</value>
                             <value>classpath:com/aspectran/web/support/tags/aspectran.tld</value>
                         </item>
                     </properties>
