@@ -27,16 +27,16 @@ import app.demo.chat.model.payload.SendTextMessagePayload;
 import app.demo.chat.model.payload.WelcomeUserPayload;
 import com.aspectran.core.activity.InstantActivitySupport;
 import com.aspectran.core.component.bean.annotation.Component;
+import com.aspectran.core.util.logging.Logger;
+import com.aspectran.core.util.logging.LoggerFactory;
 import com.aspectran.web.socket.jsr356.AspectranConfigurator;
 
 import javax.websocket.CloseReason;
-import javax.websocket.EndpointConfig;
 import javax.websocket.OnClose;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
-import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -54,10 +54,15 @@ import java.util.concurrent.ConcurrentHashMap;
 )
 public class ChatServerEndpoint extends InstantActivitySupport {
 
+    private static final Logger logger = LoggerFactory.getLogger(ChatServerEndpoint.class);
+
     private static final Map<String, Session> sessions = new ConcurrentHashMap<>();
 
     @OnOpen
-    public void onOpen(Session session, EndpointConfig config) throws IOException {
+    public void onOpen(Session session) {
+        if (logger.isDebugEnabled()) {
+            logger.debug("WebSocket connection established with session: " + session.getId());
+        }
     }
 
     @OnMessage
@@ -96,6 +101,9 @@ public class ChatServerEndpoint extends InstantActivitySupport {
 
     @OnClose
     public void onClose(Session session, CloseReason reason) {
+        if (logger.isDebugEnabled()) {
+            logger.debug("Websocket session " + session.getId() + " has been closed. Reason: " + reason);
+        }
         String username = getUsername(session);
         if (username != null) {
             leaveUser(username);
