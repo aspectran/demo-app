@@ -22,7 +22,7 @@ This site is a collection of reference applications created to show how to devel
 
   ```sh
   $ cd app/bin
-  $ ./shell.sh
+  $ ./jline-shell.sh
   ```
 
 - Access in your browser at http://localhost:8080
