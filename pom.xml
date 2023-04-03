@@ -31,7 +31,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.build.resourceEncoding>UTF-8</project.build.resourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <aspectran.version>7.2.0-SNAPSHOT</aspectran.version>
+        <aspectran.version>7.2.0</aspectran.version>
     </properties>
     <repositories>
         <repository>
@@ -184,7 +184,7 @@
         <dependency>
             <groupId>org.mariadb.jdbc</groupId>
             <artifactId>mariadb-java-client</artifactId>
-            <version>3.0.8</version>
+            <version>3.1.2</version>
         </dependency>
         <dependency>
             <groupId>com.h2database</groupId>
