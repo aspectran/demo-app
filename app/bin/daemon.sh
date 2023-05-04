@@ -78,7 +78,7 @@ DAEMON_MAIN="com.aspectran.daemon.DefaultDaemon"
 LOCK_FILE="$BASE_DIR/.lock"
 CLASSPATH="$BASE_DIR/lib/*"
 TMP_DIR="$BASE_DIR/temp"
-LOGGING_CONFIG="$BASE_DIR/config/logback.xml"
+LOGGING_CONFIG="$BASE_DIR/config/logging/logging/logback.xml"
 ASPECTRAN_CONFIG="$BASE_DIR/config/aspectran-config.apon"
 
 start_daemon() {
