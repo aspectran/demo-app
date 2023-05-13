@@ -31,7 +31,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.build.resourceEncoding>UTF-8</project.build.resourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <aspectran.version>7.2.0</aspectran.version>
+        <aspectran.version>7.3.0-SNAPSHOT</aspectran.version>
     </properties>
     <repositories>
         <repository>
@@ -72,7 +72,7 @@
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>3.3.0</version>
                 <configuration>
-                    <outputDirectory>app/lib</outputDirectory>
+                    <outputDirectory>app/lib/ext</outputDirectory>
                 </configuration>
             </plugin>
             <plugin>
@@ -80,7 +80,7 @@
                 <version>3.5.0</version>
                 <executions>
                     <execution>
-                        <id>copy-dependencies-1</id>
+                        <id>copy-dependencies</id>
                         <phase>package</phase>
                         <goals>
                             <goal>copy-dependencies</goal>
