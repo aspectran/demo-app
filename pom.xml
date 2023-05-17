@@ -60,7 +60,6 @@
                     <debug>true</debug>
                     <fork>true</fork>
                     <parameters>true</parameters>
-                    <optimize>true</optimize>
                     <showDeprecation>true</showDeprecation>
                     <showWarnings>true</showWarnings>
                     <excludes>
