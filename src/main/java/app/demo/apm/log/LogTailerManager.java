@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2008-2021 The Aspectran Project
+ * Copyright (c) 2008-2023 The Aspectran Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -55,6 +55,7 @@ public class LogTailerManager {
         for (String name : names) {
             LogTailer tailer = tailers.get(name);
             if (tailer != null) {
+                tailer.readLastLines();
                 list.add(name);
                 if (!tailer.isRunning()) {
                     try {
