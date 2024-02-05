@@ -7,15 +7,6 @@
         Simple program to demonstrate the use of the FreeTTS speech synthesizer.
     </description>
 
-    <bean id="speaker" class="app.demo.tts.TextToSpeechBean">
-        <properties>
-            <item name="properties" type="properties">
-                <entry name="freetts.voices">com.sun.speech.freetts.en.us.cmu_us_kal.KevinVoiceDirectory</entry>
-            </item>
-            <item name="voiceName">kevin16</item>
-        </properties>
-    </bean>
-
     <translet name="speak">
         <description style="apon">
             |
@@ -29,7 +20,7 @@
                 <item name="text"/>
             </parameters>
         </request>
-        <action bean="speaker" method="speak">
+        <action bean="voice-kevin16" method="speak">
             <arguments>
                 <item>${text:Hello}</item>
             </arguments>
@@ -47,7 +38,7 @@
             |   you type.
             |
         </description>
-        <action bean="speaker" method="speak">
+        <action bean="voice-kevin16" method="speak">
             <arguments>
                 <item>${text:Hello}</item>
             </arguments>
