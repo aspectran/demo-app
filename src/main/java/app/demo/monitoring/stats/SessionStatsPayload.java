@@ -19,7 +19,6 @@ import com.aspectran.utils.json.JsonWriter;
 
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.Objects;
 
 /**
  * <p>Created: 2020/01/11</p>
@@ -38,7 +37,7 @@ public class SessionStatsPayload {
 
     private long rejectedSessionCount;
 
-    private String startTime;
+    private String elapsedTime;
 
     private String[] currentSessions;
 
@@ -90,12 +89,12 @@ public class SessionStatsPayload {
         this.rejectedSessionCount = rejectedSessionCount;
     }
 
-    public String getStartTime() {
-        return startTime;
+    public String getElapsedTime() {
+        return elapsedTime;
     }
 
-    public void setStartTime(String startTime) {
-        this.startTime = startTime;
+    public void setElapsedTime(String elapsedTime) {
+        this.elapsedTime = elapsedTime;
     }
 
     public String[] getCurrentSessions() {
@@ -119,8 +118,7 @@ public class SessionStatsPayload {
                 stats.evictedSessionCount != evictedSessionCount ||
                 stats.activeSessionCount != activeSessionCount ||
                 stats.highestActiveSessionCount != highestActiveSessionCount ||
-                stats.rejectedSessionCount != rejectedSessionCount ||
-                !Objects.equals(stats.startTime, startTime)) {
+                stats.rejectedSessionCount != rejectedSessionCount) {
             return false;
         }
         return Arrays.equals(stats.currentSessions, currentSessions);

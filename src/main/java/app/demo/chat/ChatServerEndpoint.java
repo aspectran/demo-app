@@ -27,7 +27,8 @@ import app.demo.chat.model.payload.SendTextMessagePayload;
 import app.demo.chat.model.payload.WelcomeUserPayload;
 import com.aspectran.core.activity.InstantActivitySupport;
 import com.aspectran.core.component.bean.annotation.Component;
-import com.aspectran.websocket.jsr356.AspectranConfigurator;
+import com.aspectran.utils.annotation.jsr305.NonNull;
+import com.aspectran.web.websocket.jsr356.AspectranConfigurator;
 import jakarta.websocket.CloseReason;
 import jakarta.websocket.EndpointConfig;
 import jakarta.websocket.OnClose;
@@ -110,17 +111,17 @@ public class ChatServerEndpoint extends InstantActivitySupport {
         }
     }
 
-    private void setUsername(Session session, String username) {
+    private void setUsername(@NonNull Session session, String username) {
         session.getUserProperties().put("username", username);
     }
 
-    private void welcomeUser(Session session, String username) {
+    private void welcomeUser(@NonNull Session session, String username) {
         WelcomeUserPayload payload = new WelcomeUserPayload();
         payload.setUsername(username);
         session.getAsyncRemote().sendObject(new ChatMessage(payload));
     }
 
-    private void duplicatedUser(Session session, String username) {
+    private void duplicatedUser(@NonNull Session session, String username) {
         DuplicatedUserPayload payload = new DuplicatedUserPayload();
         payload.setUsername(username);
         session.getAsyncRemote().sendObject(new ChatMessage(payload));
