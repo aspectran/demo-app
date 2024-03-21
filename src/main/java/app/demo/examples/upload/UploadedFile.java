@@ -22,8 +22,6 @@ public class UploadedFile {
 
     private String fileType;
 
-    private String url;
-
     private byte[] bytes;
 
     public String getKey() {
@@ -66,14 +64,6 @@ public class UploadedFile {
         this.fileType = fileType;
     }
 
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
     @NonSerializable
     public byte[] getBytes() {
         return bytes;
@@ -91,7 +81,6 @@ public class UploadedFile {
         tsb.append("fileSize", fileSize);
         tsb.append("humanFileSize", humanFileSize);
         tsb.append("fileType", fileType);
-        tsb.append("url", url);
         return tsb.toString();
     }
 
