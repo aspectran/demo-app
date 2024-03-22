@@ -28,6 +28,7 @@ import app.demo.chat.model.payload.WelcomeUserPayload;
 import com.aspectran.core.activity.InstantActivitySupport;
 import com.aspectran.core.component.bean.annotation.Component;
 import com.aspectran.utils.annotation.jsr305.NonNull;
+import com.aspectran.utils.annotation.jsr305.Nullable;
 import com.aspectran.web.websocket.jsr356.AspectranConfigurator;
 import jakarta.websocket.CloseReason;
 import jakarta.websocket.EndpointConfig;
@@ -62,7 +63,7 @@ public class ChatServerEndpoint extends InstantActivitySupport {
     }
 
     @OnMessage
-    public void onMessage(Session session, ChatMessage chatMessage) {
+    public void onMessage(Session session, @NonNull ChatMessage chatMessage) {
         SendTextMessagePayload payload = chatMessage.getSendTextMessagePayload();
         if (payload != null) {
             String username = getUsername(session);
@@ -103,7 +104,8 @@ public class ChatServerEndpoint extends InstantActivitySupport {
         }
     }
 
-    private String getUsername(Session session) {
+    @Nullable
+    private String getUsername(@NonNull Session session) {
         if (session.getUserProperties().get("username") != null) {
             return session.getUserProperties().get("username").toString();
         } else {

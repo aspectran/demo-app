@@ -32,7 +32,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.build.resourceEncoding>UTF-8</project.build.resourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <aspectran.version>8.0.0</aspectran.version>
+        <aspectran.version>8.0.1-SNAPSHOT</aspectran.version>
     </properties>
     <repositories>
         <repository>
@@ -50,11 +50,10 @@
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.12.1</version>
+                <version>3.13.0</version>
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
-                    <compilerVersion>${java.version}</compilerVersion>
                     <compilerArgs>
                         <arg>-Xlint:-try,-path,-options</arg>
                     </compilerArgs>
@@ -119,6 +118,15 @@
                             </excludes>
                         </fileset>
                         <fileset>
+                            <directory>app/temp</directory>
+                            <includes>
+                                <include>**</include>
+                            </includes>
+                            <excludes>
+                                <exclude>.gitignore</exclude>
+                            </excludes>
+                        </fileset>
+                        <fileset>
                             <directory>app/work</directory>
                             <includes>
                                 <include>_resource_*/</include>
@@ -134,6 +142,12 @@
         </plugins>
     </build>
     <dependencies>
+        <dependency>
+            <groupId>com.aspectran</groupId>
+            <artifactId>aspectran-with-logback</artifactId>
+            <version>${aspectran.version}</version>
+            <type>pom</type>
+        </dependency>
         <dependency>
             <groupId>com.aspectran</groupId>
             <artifactId>aspectran-daemon</artifactId>
@@ -167,7 +181,7 @@
         <dependency>
             <groupId>org.mariadb.jdbc</groupId>
             <artifactId>mariadb-java-client</artifactId>
-            <version>3.3.2</version>
+            <version>3.3.3</version>
         </dependency>
         <dependency>
             <groupId>com.h2database</groupId>

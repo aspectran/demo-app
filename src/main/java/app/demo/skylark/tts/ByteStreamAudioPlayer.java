@@ -33,7 +33,7 @@ import java.io.OutputStream;
  */
 public class ByteStreamAudioPlayer implements AudioPlayer {
 
-    private OutputStream output;
+    private final OutputStream output;
 
     private AudioFormat audioFormat;
 
@@ -256,7 +256,7 @@ public class ByteStreamAudioPlayer implements AudioPlayer {
     /**
      * A transformer that encodes bytes into different types of data.
      */
-    interface Transformer {
+    public interface Transformer {
 
         byte[] transform(byte[] bytes);
 

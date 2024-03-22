@@ -4,7 +4,7 @@
 <aspectran>
 
     <description>
-        Aspectran configuration for setting servlet context and root web application.
+        Aspectran configuration for setting up the servlet context.
     </description>
 
     <environment>
@@ -94,7 +94,8 @@
         </properties>
     </bean>
 
-    <bean id="tow.context.root.sessionManager" class="com.aspectran.undertow.server.session.TowSessionManager"
+    <bean id="tow.context.root.sessionManager"
+          class="com.aspectran.undertow.server.session.TowSessionManager"
           scope="prototype">
         <properties>
             <item name="sessionManagerConfig">
@@ -102,9 +103,9 @@
                     <arguments>
                         <item>
                             workerName: n0
-                            maxActiveSessions: 99
-                            maxIdleSeconds: 600
-                            evictionIdleSeconds: 300
+                            maxActiveSessions: 9999
+                            maxIdleSeconds: 489
+                            evictionIdleSeconds: 258
                             scavengingIntervalSeconds: 180
                             clusterEnabled: false
                         </item>
@@ -115,6 +116,7 @@
                 <bean class="com.aspectran.core.component.session.FileSessionStoreFactory">
                     <properties>
                         <item name="storeDir">/work/_sessions/tow</item>
+                        <item name="gracePeriodSecs" valueType="int">10</item>
                         <item name="nonPersistentAttributes" type="array">
                             <value>io.undertow.websocket.current-connections</value>
                         </item>
