@@ -17,6 +17,7 @@ package app.demo.examples.customer;
 
 import com.aspectran.core.component.bean.annotation.Bean;
 import com.aspectran.core.component.bean.annotation.Component;
+import com.aspectran.utils.annotation.jsr305.NonNull;
 import com.aspectran.utils.logging.Logger;
 import com.aspectran.utils.logging.LoggerFactory;
 
@@ -45,7 +46,7 @@ public class CustomerRepository {
         for (int i = 1; i <= 10; i++) {
             Customer customer = new Customer();
             customer.putValue(Customer.id, i);
-            customer.putValue(Customer.name, "Guest - " + i);
+            customer.putValue(Customer.name, "Guest " + i);
             customer.putValue(Customer.age, i + 20);
             customer.putValue(Customer.approved, true);
             customerMap.put(i, customer);
@@ -81,6 +82,10 @@ public class CustomerRepository {
     }
 
     public int insertCustomer(Customer customer) {
+        if (customerMap.size() > 9999) {
+            return -1;
+        }
+
         int id = counter.incrementAndGet();
         customer.putValue(Customer.id, id);
 
@@ -91,7 +96,7 @@ public class CustomerRepository {
         return id;
     }
 
-    public synchronized boolean updateCustomer(Customer customer) {
+    public synchronized boolean updateCustomer(@NonNull Customer customer) {
         int id = customer.getInt(Customer.id);
         if (customerMap.containsKey(id)) {
             logger.debug("Update customer: " + id);
