@@ -1,15 +1,15 @@
-package app.demo.common.dao;
+package app.demo.mybatis;
 
 import com.aspectran.core.component.bean.annotation.Bean;
 import com.aspectran.core.component.bean.annotation.Component;
 import com.aspectran.mybatis.SqlSessionAgent;
 
 @Component
-@Bean("simpleSqlSession")
-public class SimpleSqlSession extends SqlSessionAgent {
+@Bean("batchSqlSession")
+public class BatchSqlSession extends SqlSessionAgent {
 
-    public SimpleSqlSession() {
-        super("simpleTxAspect");
+    public BatchSqlSession() {
+        super("batchTxAspect");
         setAutoParameters(true);
     }
 
