@@ -56,16 +56,16 @@ public class TransletInterpreter extends InstantActivitySupport {
     @RequestToGet("/query/@{_translet_}")
     @Transform(format = FormatType.TEXT, contentType = "application/json")
     public void query(@NonNull Translet translet) throws IOException {
-        String transletName = translet.getAttribute("_translet_");
-        if (StringUtils.isEmpty(transletName)) {
+        String requestName = translet.getAttribute("_translet_");
+        if (StringUtils.isEmpty(requestName)) {
             return;
         }
 
-        transletName = COMMANDS_PREFIX + transletName;
-        TransletRule transletRule = getActivityContext().getTransletRuleRegistry().getTransletRule(transletName);
+        requestName = COMMANDS_PREFIX + requestName;
+        TransletRule transletRule = getActivityContext().getTransletRuleRegistry().getTransletRule(requestName);
         if (transletRule == null) {
             if (logger.isDebugEnabled()) {
-                logger.debug("Translet not found: " + transletName);
+                logger.debug("No translet " + requestName);
             }
 
             JsonWriter jsonWriter = new JsonWriter(translet.getResponseAdapter().getWriter());
@@ -128,16 +128,16 @@ public class TransletInterpreter extends InstantActivitySupport {
 
     @RequestToPost("/exec/@{_translet_}")
     public void execute(@NonNull Translet translet) {
-        String transletName = translet.getAttribute("_translet_");
-        if (StringUtils.isEmpty(transletName)) {
+        String requestName = translet.getAttribute("_translet_");
+        if (StringUtils.isEmpty(requestName)) {
             return;
         }
 
         try {
-            transletName = COMMANDS_PREFIX + transletName;
-            instantActivity(transletName);
+            requestName = COMMANDS_PREFIX + requestName;
+            instantActivity(requestName);
         } catch (Exception e) {
-            logger.error("Failed to execute translet: " + transletName, e);
+            logger.error("Failed to execute translet: " + requestName, e);
         }
     }
 
