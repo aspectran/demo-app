@@ -114,6 +114,7 @@ daemon: {
 web: {
     defaultServletName: default
     trailingSlashRedirect: true
+    legacyHeadHandling: true
     exposals: {
         +: /**
     }
