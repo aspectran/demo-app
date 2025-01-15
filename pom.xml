@@ -22,7 +22,7 @@
     <artifactId>demo-app</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <name>Aspectow Demo</name>
+    <name>Aspectow Demo (demo-app)</name>
     <inceptionYear>2018</inceptionYear>
 
     <organization>
