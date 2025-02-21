@@ -22,7 +22,7 @@
     <artifactId>demo-app</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
-    <name>Aspectow Demo (demo-app)</name>
+    <name>Demo App</name>
     <inceptionYear>2018</inceptionYear>
 
     <organization>
@@ -100,11 +100,6 @@
             <groupId>net.sf.sociaal</groupId>
             <artifactId>freetts</artifactId>
             <version>1.2.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.mariadb.jdbc</groupId>
-            <artifactId>mariadb-java-client</artifactId>
-            <version>3.5.2</version>
         </dependency>
         <dependency>
             <groupId>com.h2database</groupId>
