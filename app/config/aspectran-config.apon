@@ -12,8 +12,11 @@ context: {
         app.demo
     ]
     profiles: {
-        default: [
+        essential: [
             h2
+        ]
+        default: [
+            dev
         ]
     }
     autoReload: {
