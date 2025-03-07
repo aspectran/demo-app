@@ -1,15 +1,15 @@
-package app.demo.mybatis;
+package app.demo.common.db;
 
 import com.aspectran.core.component.bean.annotation.Bean;
 import com.aspectran.core.component.bean.annotation.Component;
 import com.aspectran.mybatis.SqlSessionAgent;
 
 @Component
-@Bean(id = "reuseSqlSession", lazyDestroy = true)
-public class ReuseSqlSession extends SqlSessionAgent {
+@Bean(id = "batchSqlSession", lazyDestroy = true)
+public class BatchSqlSession extends SqlSessionAgent {
 
-    public ReuseSqlSession() {
-        super("reuseTxAspect");
+    public BatchSqlSession() {
+        super("batchTxAspect");
         setAutoParameters(true);
     }
 

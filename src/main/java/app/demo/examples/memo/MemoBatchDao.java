@@ -1,6 +1,6 @@
 package app.demo.examples.memo;
 
-import app.demo.mybatis.BatchSqlSession;
+import app.demo.common.db.BatchSqlSession;
 import com.aspectran.core.component.bean.annotation.Autowired;
 import com.aspectran.core.component.bean.annotation.Bean;
 import com.aspectran.core.component.bean.annotation.Component;
