@@ -12,7 +12,7 @@ context: {
         app.demo
     ]
     profiles: {
-        essential: [
+        base: [
             h2
         ]
         default: [
