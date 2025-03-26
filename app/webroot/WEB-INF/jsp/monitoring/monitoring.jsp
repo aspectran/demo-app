@@ -44,7 +44,7 @@
                 <dd><span class="number rejectedSessionCount">0</span></dd>
             </dl>
         </div>
-        <p class="text-right"><i>Since <span class="startTime"></span></i></p>
+        <p class="text-right"><i>Elapsed <span class="elapsedTime"></span></i></p>
     </div>
     <div class="cell small-12 large-7 t20">
         <h3>Current Sessions

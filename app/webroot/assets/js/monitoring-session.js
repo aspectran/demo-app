@@ -63,7 +63,7 @@ const SessionStats = function(endpoint, refreshInterval) {
         $(".createdSessionCount").text(stats.createdSessionCount);
         $(".expiredSessionCount").text(stats.expiredSessionCount);
         $(".rejectedSessionCount").text(stats.rejectedSessionCount);
-        $(".startTime").text(stats.startTime);
+        $(".elapsedTime").text(stats.elapsedTime);
         if (stats.currentSessions) {
             $(".sessions").empty();
             stats.currentSessions.forEach(function(username) {
