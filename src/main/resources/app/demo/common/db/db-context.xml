@@ -23,7 +23,7 @@
         </properties>
     </bean>
 
-    <bean id="sqlSessionTxAdvice" class="com.aspectran.mybatis.SqlSessionTxAdvice" scope="prototype">
+    <bean id="sqlSessionTxAdvice" class="com.aspectran.mybatis.SqlSessionAdvice" scope="prototype">
         <description>
             An advice bean that handles database transactions.
         </description>
