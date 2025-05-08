@@ -1,4 +1,4 @@
-package app.demo.common.db;
+package app.demo.common.mybatis;
 
 import com.aspectran.core.component.bean.annotation.Bean;
 import com.aspectran.core.component.bean.annotation.Component;
