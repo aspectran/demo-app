@@ -22,7 +22,7 @@ import app.demo.chat.model.payload.BroadcastTextMessagePayload;
 import app.demo.chat.model.payload.DuplicatedUserPayload;
 import app.demo.chat.model.payload.SendTextMessagePayload;
 import app.demo.chat.model.payload.WelcomeUserPayload;
-import com.aspectran.utils.apon.AbstractParameters;
+import com.aspectran.utils.apon.DefaultParameters;
 import com.aspectran.utils.apon.ParameterKey;
 
 /**
@@ -30,7 +30,7 @@ import com.aspectran.utils.apon.ParameterKey;
  *
  * <p>Created: 2019/10/09</p>
  */
-public class ChatMessage extends AbstractParameters {
+public class ChatMessage extends DefaultParameters {
 
     private static final ParameterKey welcomeUser;
     private static final ParameterKey duplicatedUser;
