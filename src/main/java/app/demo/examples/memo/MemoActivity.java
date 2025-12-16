@@ -19,7 +19,7 @@ import com.aspectran.core.activity.Translet;
 import com.aspectran.core.component.bean.annotation.Autowired;
 import com.aspectran.core.component.bean.annotation.Bean;
 import com.aspectran.core.component.bean.annotation.Component;
-import com.aspectran.utils.annotation.jsr305.NonNull;
+import org.jspecify.annotations.NonNull;
 
 import java.util.List;
 import java.util.Map;
