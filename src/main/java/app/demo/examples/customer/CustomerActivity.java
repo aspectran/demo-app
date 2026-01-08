@@ -23,7 +23,6 @@ import com.aspectran.core.component.bean.annotation.RequestToDelete;
 import com.aspectran.core.component.bean.annotation.RequestToGet;
 import com.aspectran.core.component.bean.annotation.RequestToPost;
 import com.aspectran.core.component.bean.annotation.RequestToPut;
-import com.aspectran.core.component.bean.annotation.Required;
 import com.aspectran.web.activity.response.DefaultRestResponse;
 import com.aspectran.web.activity.response.RestResponse;
 import org.jspecify.annotations.NonNull;
@@ -49,7 +48,7 @@ public class CustomerActivity {
 
     @RequestToGet("/customers/${id:guest}")
     @Description("Retrieves a customer by ID.")
-    public RestResponse getCustomer(@Required Integer id) {
+    public RestResponse getCustomer(@NonNull Integer id) {
         Customer customer = repository.getCustomer(id);
         RestResponse response = new DefaultRestResponse();
         if (customer != null) {
@@ -62,7 +61,7 @@ public class CustomerActivity {
 
     @RequestToPost("/customers")
     @Description("Add a new customer to the repository.")
-    public RestResponse addCustomer(@NonNull Translet translet, @Required Customer customer) {
+    public RestResponse addCustomer(@NonNull Translet translet, @NonNull Customer customer) {
         int id = repository.insertCustomer(customer);
         if (id == -1) {
             return new DefaultRestResponse(customer).forbidden();
@@ -74,7 +73,7 @@ public class CustomerActivity {
 
     @RequestToPut("/customers/${id}")
     @Description("Updates an existing customer in the repository with form data.")
-    public RestResponse updateCustomer(@Required Customer customer) {
+    public RestResponse updateCustomer(@NonNull Customer customer) {
         boolean updated = repository.updateCustomer(customer);
         RestResponse response = new DefaultRestResponse();
         if (updated) {
@@ -87,7 +86,7 @@ public class CustomerActivity {
 
     @RequestToDelete("/customers/${id}")
     @Description("Deletes a customer by ID.")
-    public RestResponse deleteCustomer(@Required Integer id) {
+    public RestResponse deleteCustomer(@NonNull Integer id) {
         boolean deleted = repository.deleteCustomer(id);
         RestResponse response = new DefaultRestResponse();
         if (deleted) {
@@ -100,7 +99,7 @@ public class CustomerActivity {
 
     @RequestToPut("/customers/${id}/attributes")
     @Description("Updates an existing customer's attributes.")
-    public RestResponse updateAttributes(@Required Integer id, @Required Boolean approved) {
+    public RestResponse updateAttributes(@NonNull Integer id, @NonNull Boolean approved) {
         boolean updated = repository.approve(id, approved);
         RestResponse response = new DefaultRestResponse();
         if (updated) {
