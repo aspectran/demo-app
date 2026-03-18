@@ -34,7 +34,7 @@
         </settings>
     </aspect>
 
-    <append resource="app/demo/home/main.xml"/>
+    <append resource="app/demo/home/home.xml"/>
     <append resource="app/demo/examples/hello-world.xml"/>
     <append resource="app/demo/examples/gs-rest-service.xml"/>
     <append resource="app/demo/examples/file-upload.xml"/>
