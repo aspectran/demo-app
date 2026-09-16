@@ -85,7 +85,7 @@
                 <bean class="com.aspectran.core.context.config.SessionManagerConfig">
                     <arguments>
                         <item>
-                            workerName: n0
+                            routeId: %{system:aspectow.node.route}
                             maxActiveSessions: 9999
                             maxIdleSeconds: 489
                             evictionIdleSeconds: 258
